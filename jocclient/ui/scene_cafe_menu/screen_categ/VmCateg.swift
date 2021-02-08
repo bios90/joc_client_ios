@@ -40,4 +40,9 @@ extension VmCateg
     {
         ps_clicked_product.onNext(product)
     }
+    
+    func clickedArrowBack()
+    {
+        CoordinatorCafeMenu.ps_clicked_arrow_back.onNext(())
+    }
 }

@@ -1,9 +1,18 @@
-//
-//  RespOrders.swift
-//  jocclient
-//
-//  Created by Филипп Бесядовский on 05.02.2021.
-//  Copyright © 2021 justordercompany. All rights reserved.
-//
-
 import Foundation
+
+class RespOrders:BaseResponse
+{
+    var orders:[ModelOrder]? = []
+    
+    required init(from decoder: Decoder) throws
+    {
+        try super.init(from: decoder)
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        orders = try? values.decodeArray(type: ModelOrder.self, from: .orders)
+    }
+
+    private enum CodingKeys: String, CodingKey
+    {
+        case orders = "data"
+    }
+}

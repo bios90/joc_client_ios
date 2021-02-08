@@ -6,6 +6,7 @@ class VmList:BaseVm
 {
     let br_cafes:BehaviorRelay<[ModelCafe]> = BehaviorRelay.init(value: [])
     let ps_to_reload_cafes:PublishSubject<ReqCafesList> = PublishSubject.init()
+    let ps_clicked_cafe:PublishSubject<Int> = PublishSubject.init()
     
     override init()
     {
@@ -57,5 +58,16 @@ class VmList:BaseVm
         })
         
         ps_to_reload_cafes.onNext(req)
+    }
+}
+
+
+//MARK: -Listeners
+extension VmList
+{
+    func clickedCafe(cafe:ModelCafe)
+    {
+        guard let cafe_id = cafe.id else { return }
+        self.ps_clicked_cafe.onNext(cafe_id)
     }
 }

@@ -21,21 +21,6 @@ class VmOrderDialog:BaseVm
         br_cafe.accept(cafe)
         
         br_price.accept(BasketManager.gi.getSum())
-        
-        
-        br_comment.subscribe(onNext:
-            { text in
-                
-                print(text ?? "")
-        })
-        .disposed(by: dispose_bag)
-        
-        br_date.subscribe(onNext:
-            { date in
-                
-                print("DAte is \(date.formatToString(format: DateManager.FORMAT_FOR_SERVER))")
-        })
-        .disposed(by: dispose_bag)
     }
 }
 
@@ -44,12 +29,13 @@ extension VmOrderDialog
 {
     func clickedMakeOrder()
     {
-        let date = Date()
-        let comment = "Test commmmment"
+        let date = br_date.value
+        let comment = br_comment.value 
         PaymentManager.gi.createOrder(base_vm: self, date: date, comment: comment, action_success:
             { order_id in
                 
-                print("Got successss on paymentttt")
+                BusMainEvents.gi.ps_order_created.onNext(order_id)
+                BusMainEvents.gi.ps_finish_vm_of_type.onNext([VmOrderDialog.self, VmWrapperCafeMenu.self])
         })
     }
 }

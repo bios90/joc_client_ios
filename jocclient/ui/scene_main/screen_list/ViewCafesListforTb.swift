@@ -3,6 +3,7 @@ import UIKit
 class ViewCafesListForTb:UIViewController
 {
     private var cafes:[ModelCafe] = []
+    var action_clicked_cafe:((ModelCafe)->())?
     
     let tb_cafes:UITableView =
     {
@@ -53,6 +54,11 @@ extension ViewCafesListForTb:UITableViewDataSource,UITableViewDelegate
         var cafe = cafes[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: CellCafe.reuse_id) as! CellCafe
         cell.bindCafe(cafe: cafe)
+        
+        cell.root_btn.removeClickAction()
+        cell.root_btn.addAction {
+            self.action_clicked_cafe?(cafe)
+        }
         
         return cell
     }

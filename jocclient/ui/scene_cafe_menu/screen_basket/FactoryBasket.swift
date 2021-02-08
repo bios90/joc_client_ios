@@ -14,6 +14,11 @@ class FactoryBasket
         return view
     }()
     
+    let img_arrow_back:BtnRipple =
+    {
+        return ViewsHelper.getArrowBack()
+    }()
+    
     let lbl_title:UILabel =
     {
         let lbl = UILabel()
@@ -145,6 +150,7 @@ class FactoryBasket
         
         self.vc.view.addSubview(view_top)
         view_top.addSubview(lbl_title)
+        view_top.addSubview(img_arrow_back)
         self.vc.view.addSubview(tb_bakset_items)
         self.vc.view.addSubview(view_bottom)
         
@@ -155,6 +161,14 @@ class FactoryBasket
                 make.centerX.width.equalToSuperview()
                 make.top.equalToSuperview()
                 make.height.equalTo(height)
+        })
+        
+        img_arrow_back.snp.makeConstraints(
+            { make in
+                
+                make.width.height.equalTo(28)
+                make.left.equalToSuperview().offset(10)
+                make.bottom.equalToSuperview().offset(-12)
         })
         
         lbl_title.snp.makeConstraints(
@@ -228,6 +242,6 @@ class FactoryBasket
                 make.bottom.equalTo(btn_order.snp.top).offset(-10)
                 make.centerX.equalToSuperview()
         })
-
+        
     }
 }

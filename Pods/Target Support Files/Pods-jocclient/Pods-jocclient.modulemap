@@ -1,0 +1,6 @@
+framework module Pods_jocclient {
+  umbrella header "Pods-jocclient-umbrella.h"
+
+  export *
+  module * { export * }
+}

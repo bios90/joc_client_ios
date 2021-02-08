@@ -18,6 +18,7 @@ enum MyImage:String
     case ic_cup_hot
     case ic_cup_to_go
     case ic_cookies
+    case ic_arrow_left
     
     func getImage() -> UIImage
     {

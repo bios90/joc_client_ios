@@ -158,16 +158,15 @@ class LaCafePopup:UIView
         self.addSubview(lbl_time)
         self.addSubview(btn_to_cafe)
         
-    
         self.backgroundColor = MyColors.gi.white
-        self.layer.cornerRadius = 12
+//        self.layer.cornerRadius = 12
     
         self.snp.makeConstraints(
             { make in
                 
                 make.width.equalTo(getScreenWidth())
                 let last_view = self.subviews.last!
-                make.bottom.equalTo(last_view.snp.bottom).offset(16)
+                make.bottom.equalTo(last_view.snp.bottom).offset(16+getBottomSafeInset())
         })
         
         view_for_avatar.snp.makeConstraints(
@@ -251,5 +250,10 @@ class LaCafePopup:UIView
                 make.height.equalTo(36)
                 make.top.equalTo(lbl_time.snp.bottom).offset(16)
         })
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.makeRoundCorners(corners: [.topLeft,.topRight], radius: 12)
     }
 }

@@ -1,7 +1,12 @@
-import Foundation
+import UIKit
 
-class BaseImage:Codable
+class BaseImage:Codable,ObjWithImage
 {
+    //ObjWithImage
+    var url: String?
+    var image: UIImage? = nil
+    //
+    
     var width:Int?
     var height:Int?
     var src:String?
@@ -18,6 +23,8 @@ class BaseImage:Codable
         self.url_s = try? container.decodeString(from: .url_s)
         self.url_m = try? container.decodeString(from: .url_m)
         self.url_l = try? container.decodeString(from: .url_l)
+        
+        self.url = url_l
     }
     
     enum CodingKeys: String, CodingKey

@@ -61,6 +61,10 @@ class ViewBasket:BaseViewController
         factory_basket.btn_quick_order.addAction {
             self.vm_basket.clickedQuickOrder()
         }
+        
+        factory_basket.img_arrow_back.addAction {
+            self.vm_basket.clickedArrowBack()
+        }
     }
     
     private func rebindToPageStatus(status:TypeBasketPageStatus)

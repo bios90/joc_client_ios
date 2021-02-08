@@ -1,0 +1,200 @@
+PODS:
+  - Alamofire (5.0.5)
+  - AvailableHapticFeedback (1.0.2)
+  - Cache (5.3.0)
+  - Cosmos (23.0.0)
+  - DeepDiff (2.3.1)
+  - FunctionalSwift (1.2.0)
+  - GoogleMaps (3.1.0):
+    - GoogleMaps/Maps (= 3.1.0)
+  - GoogleMaps/Base (3.1.0)
+  - GoogleMaps/Maps (3.1.0):
+    - GoogleMaps/Base
+  - GooglePlacePicker (3.1.0):
+    - GoogleMaps (= 3.1.0)
+    - GooglePlaces (= 3.1.0)
+  - GooglePlaces (3.1.0):
+    - GoogleMaps/Base (= 3.1.0)
+  - Imaginary (4.3.1):
+    - Cache (~> 5.3.0)
+  - IQKeyboardManagerSwift (6.5.6)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
+  - Lightbox (2.3.0):
+    - Imaginary (~> 4.0)
+  - MaterialComponents/AnimationTiming (121.0.1)
+  - MaterialComponents/Availability (121.0.1)
+  - MaterialComponents/private/Color (121.0.1):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/Math (121.0.1)
+  - MaterialComponents/Ripple (121.0.1):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MoneyAuth (2.0.0):
+    - FunctionalSwift
+    - YooMoneyCoreApi
+  - MultiSlider (1.11.2):
+    - AvailableHapticFeedback
+    - SweeterSwift
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
+  - PryntTrimmerView (4.0.2)
+  - QuickLayout (3.0.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - SimpleCheckbox (2.1.0)
+  - SnapKit (5.0.1)
+  - SteviaLayout (4.7.3)
+  - SweeterSwift (1.1.4)
+  - SwiftEntryKit (1.2.3):
+    - QuickLayout (= 3.0.0)
+  - SwiftyAvatar (1.1.3)
+  - SwipeViewController (2.0)
+  - When (4.0.0)
+  - YandexMobileMetrica/Dynamic (3.12.0):
+    - YandexMobileMetrica/Dynamic/Core (= 3.12.0)
+    - YandexMobileMetrica/Dynamic/Crashes (= 3.12.0)
+  - YandexMobileMetrica/Dynamic/Core (3.12.0)
+  - YandexMobileMetrica/Dynamic/Crashes (3.12.0):
+    - YandexMobileMetrica/Dynamic/Core
+  - YooKassaPayments (5.1.0):
+    - FunctionalSwift (~> 1.2.0)
+    - MoneyAuth (~> 2.0.0)
+    - When (~> 4.0.0)
+    - YandexMobileMetrica/Dynamic (~> 3.12.0)
+    - YooKassaPaymentsApi (~> 2.3.0)
+    - YooKassaWalletApi (~> 2.2.0)
+    - YooMoneyCoreApi (~> 1.9.0)
+  - YooKassaPaymentsApi (2.3.0):
+    - FunctionalSwift (~> 1.2.0)
+    - YooMoneyCoreApi (~> 1.9.0)
+  - YooKassaWalletApi (2.2.0):
+    - FunctionalSwift (~> 1.2.0)
+    - YooMoneyCoreApi (~> 1.9.0)
+  - YooMoneyCoreApi (1.9.0):
+    - FunctionalSwift (~> 1.2.0)
+  - YPImagePicker (4.4.0):
+    - PryntTrimmerView (~> 4.0.2)
+    - SteviaLayout (~> 4.7.3)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.0.0)
+  - Cosmos (~> 23.0)
+  - DeepDiff
+  - GoogleMaps
+  - GooglePlacePicker
+  - GooglePlaces
+  - IQKeyboardManagerSwift
+  - Kingfisher (~> 5.0)
+  - Lightbox (~> 2.3.0)
+  - MaterialComponents/Ripple
+  - MultiSlider
+  - NVActivityIndicatorView
+  - RxCocoa (~> 5)
+  - RxSwift (~> 5)
+  - SimpleCheckbox
+  - SnapKit (~> 5.0.0)
+  - SwiftEntryKit (= 1.2.3)
+  - SwiftyAvatar (~> 1.1)
+  - SwipeViewController
+  - YooKassaPayments (from `https://github.com/yoomoney/yookassa-payments-swift.git`, tag `5.1.0`)
+  - YPImagePicker
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - AvailableHapticFeedback
+    - Cache
+    - Cosmos
+    - DeepDiff
+    - FunctionalSwift
+    - GoogleMaps
+    - GooglePlacePicker
+    - GooglePlaces
+    - Imaginary
+    - IQKeyboardManagerSwift
+    - Kingfisher
+    - Lightbox
+    - MaterialComponents
+    - MultiSlider
+    - NVActivityIndicatorView
+    - PryntTrimmerView
+    - QuickLayout
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SimpleCheckbox
+    - SnapKit
+    - SteviaLayout
+    - SweeterSwift
+    - SwiftEntryKit
+    - SwiftyAvatar
+    - SwipeViewController
+    - When
+    - YandexMobileMetrica
+    - YooKassaPaymentsApi
+    - YooKassaWalletApi
+    - YooMoneyCoreApi
+    - YPImagePicker
+  https://github.com/yoomoney-tech/cocoa-pod-specs.git:
+    - MoneyAuth
+
+EXTERNAL SOURCES:
+  YooKassaPayments:
+    :git: https://github.com/yoomoney/yookassa-payments-swift.git
+    :tag: 5.1.0
+
+CHECKOUT OPTIONS:
+  YooKassaPayments:
+    :git: https://github.com/yoomoney/yookassa-payments-swift.git
+    :tag: 5.1.0
+
+SPEC CHECKSUMS:
+  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
+  AvailableHapticFeedback: 9b21b9f6d3e4566015988b5de35b40abefe6c09a
+  Cache: 48762993ec44e1d93483c4d4a13edd18452326f4
+  Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  DeepDiff: e5ae6c50d0321568e4508cec5930b9f10bb293fc
+  FunctionalSwift: 1b839fcf50b8db067885938df54f818518356dbb
+  GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
+  GooglePlacePicker: fa975116ac202ac29822c0a79758ea1c4db5a95f
+  GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
+  Imaginary: 18c5bba364229eef383b925199db442e71d175e1
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
+  Lightbox: d317750e4132bfb871a5307cfe0a2c7d6a583c65
+  MaterialComponents: afb3574c87696721741006fbb428d26c7565fc0f
+  MoneyAuth: 906847277f9b3e0c59e920133dad70a0933374ab
+  MultiSlider: 944d00877d371bbb5ce0a512fec517de87958775
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
+  QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SimpleCheckbox: ddcd433ab8c3a8f57300bebda13151a8f302c7f9
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
+  SweeterSwift: 8a90cf3156f5a1b6f39785c479369a16633b5ea9
+  SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
+  SwiftyAvatar: 33aecda825c91851cac2aabd06b33f3698b2414c
+  SwipeViewController: 87ac3b72473f2caee7b84a7761c9367501fd557a
+  When: 4ffc88d535a094ad4bd5eaf2fd187de747e716d1
+  YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
+  YooKassaPayments: 0f0f3a9597a84f86eb979f81c852392850c5ef3a
+  YooKassaPaymentsApi: 66302803d0389fbc27238d8ff9447c10ac1e31bf
+  YooKassaWalletApi: 5fa5f93ebd08d926f8f4adaa5f50863ce6602013
+  YooMoneyCoreApi: 4f40673a79d11e95af850bb97f264995ac47a873
+  YPImagePicker: 15aed8bcaa4dad976e11b6114126d731a2f9f3c9
+
+PODFILE CHECKSUM: 2b716e0a98b36720c2920e42803ea08b6f55d014
+
+COCOAPODS: 1.10.1

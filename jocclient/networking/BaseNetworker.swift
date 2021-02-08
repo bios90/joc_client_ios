@@ -183,4 +183,43 @@ class BaseNetworker
             })
             .disposed(by: base_vm.dispose_bag)
     }
+    
+    func getUserOrders(offset:Int,limit:Int, action_success:@escaping([ModelOrder])->Void,action_error:@escaping(Error)->Void)
+    {
+        MyRequest.getReqUserOrders(offset: offset, limit: limit)
+            .toObservable()
+            .addMyParser(type: RespOrders.self)
+            .addProgressDialog()
+            .addScreenDisabling()
+            .addMyErrorChecker()
+            .mainThreated()
+            .subscribeMy(
+                { response in
+                    
+                    action_success(response.orders ?? [])
+            },
+                { error in
+                    
+                    action_error(error)
+            })
+            .disposed(by: base_vm.dispose_bag)
+    }
+    
+    func getOrderInfoById(order_id:Int,action_success:@escaping(ModelOrder)->Void)
+    {
+        MyRequest.getReqLoadOrderById(order_id: order_id)
+            .toObservable()
+            .addMyParser(type: RespOrderSingle.self)
+            .addProgressDialog()
+            .addScreenDisabling()
+            .addMyErrorChecker()
+            .addParsingFilter({ $0.order != nil })
+            .mainThreated()
+            .subscribeMy(
+                { response in
+                    
+                    action_success(response.order!)
+            })
+            .disposed(by: base_vm.dispose_bag)
+    }
 }

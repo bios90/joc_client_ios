@@ -20,6 +20,7 @@ class ModelCafe:Codable,ObjectWithId,ObjectWithDates
     var images:[BaseImage]?
     var menu:ModelMenu?
     var can_order:Bool?
+    var reviews:[ModelReview]? = []
     
     required public init(from decoder: Decoder) throws
     {
@@ -41,6 +42,7 @@ class ModelCafe:Codable,ObjectWithId,ObjectWithDates
         let can_order_str = try? container.decodeString(from: .can_order)
         self.can_order = can_order_str?.toBool()
         self.menu = try? container.decodeObject(type: ModelMenu.self, from: .menu)
+        self.reviews = try? container.decodeArray(type: ModelReview.self, from: .reviews)
     }
     
     enum CodingKeys: String, CodingKey
@@ -62,6 +64,7 @@ class ModelCafe:Codable,ObjectWithId,ObjectWithDates
         case can_order
         
         case menu
+        case reviews
     }
 }
 

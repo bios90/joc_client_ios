@@ -73,6 +73,11 @@ class VmBasket:BaseVm
 //MARK: -Listeners
 extension VmBasket
 {
+    func clickedArrowBack()
+    {
+        CoordinatorCafeMenu.ps_clicked_arrow_back.onNext(())
+    }
+    
     func clickedItem(item:ModelBasketItem)
     {
         let btn_delete = BtnAction(text: MyStrings.delete.localized(), action:
@@ -101,6 +106,12 @@ extension VmBasket
     
     func clickedQuickOrder()
     {
-        ps_clicked_quick_order.onNext(())
+        let date = Date().addingTimeInterval(TimeInterval(15 * 60.0))
+        PaymentManager.gi.createOrder(base_vm: self, date: date, comment: nil, action_success:
+            { order_id in
+                
+                BusMainEvents.gi.ps_order_created.onNext(order_id)
+                BusMainEvents.gi.ps_finish_vm_of_type.onNext([VmOrderDialog.self, VmWrapperCafeMenu.self])
+        })
     }
 }

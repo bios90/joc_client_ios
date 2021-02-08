@@ -1,6 +1,6 @@
 import UIKit
 
-class ImgSquareStroked:UIView
+class ImgSquareStroked:BtnRipple
 {
     var corner_radius = CGFloat(4)
     
@@ -12,9 +12,12 @@ class ImgSquareStroked:UIView
         return img
     }()
     
-    init()
+    override init()
     {
-        super.init(frame: .zero)
+        super.init()
+        
+        self.br_text.accept("")
+        self.setRippleColor(color: MyColors.gi.orange.withAlphaComponent(0.5))
         
         self.backgroundColor = MyColors.gi.white
         self.layer.borderColor = MyColors.gi.white.cgColor

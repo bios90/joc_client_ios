@@ -5,6 +5,22 @@ protocol ObjectWithId
     var id:Int? { get set }
 }
 
+extension Array where Element:ObjectWithId
+{
+    func findById(id:Int)->Element?
+    {
+        for obj in self
+        {
+            if(obj.id == id)
+            {
+                return obj
+            }
+        }
+        
+        return nil
+    }
+}
+
 protocol ObjectWithDates
 {
     var created: Date? { get set }

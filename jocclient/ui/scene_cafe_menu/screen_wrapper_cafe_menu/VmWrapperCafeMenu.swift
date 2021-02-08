@@ -6,6 +6,7 @@ class VmWrapperCafeMenu:BaseVm
 {
     var br_initial_cafe_loaded:BehaviorRelay<ModelCafe?> = BehaviorRelay.init(value: nil)
     var br_cafe_id:BehaviorRelay<Int?> = BehaviorRelay.init(value: nil)
+    var br_order_id_to_repeat:BehaviorRelay<Int?> = BehaviorRelay.init(value: nil)
     var br_badge_text:BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     
     override init()
@@ -25,6 +26,11 @@ class VmWrapperCafeMenu:BaseVm
                         { cafe in
                             
                             self.br_initial_cafe_loaded.accept(cafe)
+                            
+                            if let order_to_repeat_id = self.br_order_id_to_repeat.value
+                            {
+                                self.loadOrderToRepeat(order_id: order_to_repeat_id)
+                            }
                     })
             })
             .disposed(by: dispose_bag)
@@ -74,4 +80,12 @@ class VmWrapperCafeMenu:BaseVm
     }
     
     
+    private func loadOrderToRepeat(order_id:Int)
+    {
+        base_netwoker.getOrderInfoById(order_id: order_id, action_success:
+            { order in
+                
+                BasketManager.gi.setOrder(order: order)
+        })
+    }
 }

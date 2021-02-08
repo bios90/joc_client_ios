@@ -13,6 +13,9 @@ class VmProfile:BaseVm
     let br_tf_auth_text:BehaviorRelay<String?> = BehaviorRelay.init(value: nil)
     let br_auth_mode:BehaviorRelay<TypeAuthMode> = BehaviorRelay.init(value: .Phone)
     let br_offert_checked:BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+    let br_reviews:BehaviorRelay<[ModelOrder]> = BehaviorRelay.init(value: [])
+    let ps_clicked_repeat_order:PublishSubject<ModelOrder> = PublishSubject.init()
+    
     var br_show_hide_auth:BehaviorRelay<Bool>!
     var br_user_to_display:BehaviorRelay<ModelUser?> = BehaviorRelay.init(value: nil)
     var last_entered_phone:String? = nil
@@ -27,6 +30,8 @@ class VmProfile:BaseVm
         
         setEvents()
         checkForLogin()
+        
+        reloadOrders()
     }
     
     private func setEvents()
@@ -42,6 +47,16 @@ class VmProfile:BaseVm
             .subscribe(onNext:
                 { user in
                  
+                    self.reloadUser()
+            })
+        .disposed(by: dispose_bag)
+        
+        BusMainEvents.gi.ps_order_created
+            .subscribe(onNext:
+                { order_id in
+                    
+                    BusMainEvents.gi.ps_scroll_to_tab.onNext(.profile)
+                    self.reloadOrders()
                     self.reloadUser()
             })
         .disposed(by: dispose_bag)
@@ -71,6 +86,21 @@ class VmProfile:BaseVm
                     self.br_user_to_display.accept(user)
             })
         }
+    }
+    
+    private func reloadOrders()
+    {
+        print("Reloading orders!!!")
+        
+        base_netwoker.getUserOrders(offset: 0, limit: 300, action_success:
+            { orders in
+                
+                self.br_reviews.accept(orders)
+        }, action_error:
+            { error in
+          
+                print("Error on getting orders")
+        })
     }
 }
 
@@ -136,5 +166,51 @@ extension VmProfile
     func clickedEditProfile()
     {
         ps_clicked_edit_profile.onNext(())
+    }
+    
+    func swipedToRefreshOrders()
+    {
+        reloadOrders()
+    }
+    
+    func clickedOrder(order:ModelOrder)
+    {
+        let btn_repeat = BtnAction(text: MyStrings.repeat_word.localized(), action:
+        {_ in
+            self.clickedOrderRepeat(order: order)
+        })
+        
+        let btn_cancel = BtnAction(text: MyStrings.make_cancel.localized(), action:
+        {_ in
+            self.clickedOrderCancel(order: order)
+        })
+        let btn_review = BtnAction(text: MyStrings.review.localized(), action:
+        {_ in
+            self.clickedOrderReview(order: order)
+        })
+        
+        var btns:[BtnAction] = []
+        
+        //Todo later make for real
+        btns.append(btn_review)
+        btns.append(btn_repeat)
+        btns.append(btn_cancel)
+        
+        MessagesManager.showBottomDefault(title: nil, text: nil, btns: btns, vc: nil)
+    }
+    
+    func clickedOrderRepeat(order:ModelOrder)
+    {
+        self.ps_clicked_repeat_order.onNext(order)
+    }
+    
+    func clickedOrderCancel(order:ModelOrder)
+    {
+        
+    }
+    
+    func clickedOrderReview(order:ModelOrder)
+    {
+        
     }
 }

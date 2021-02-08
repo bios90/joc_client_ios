@@ -56,11 +56,18 @@ enum MyStrings:String
     case quick_order = "Быстрый заказ"
     case registration = "Регистрация"
     case making_time = "Время приготовления"
+    case time = "Время"
     case comment_to_order = "Комментарий к заказу"
     case pay = "Оплатить"
     case basket_is_empty = "Корзина пуста"
     case payment = "Оплата"
     case order_in_app_joc = "Оплата заказа в приложении JustOrderCompany"
+    case order_number = "Номер заказа"
+    case repeat_word = "Повторить"
+    case make_cancel = "Отменить"
+    case review = "Отзыв"
+    case more = "Ещё"
+    case close = "Закрыть"
     
     
     func localized() -> String

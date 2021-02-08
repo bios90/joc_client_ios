@@ -60,5 +60,22 @@ class ViewsHelper
         scroll.showsVerticalScrollIndicator = false
         return scroll
     }
+    
+    static func getDefaultRefreshControl()->UIRefreshControl
+    {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = MyColors.gi.orange
+        return refresh
+    }
+    
+    static func getArrowBack()->BtnRipple
+    {
+        let btn = BtnRipple()
+        let img = MyImage.ic_arrow_left.getImage().setColorMy(MyColors.gi.white)
+        btn.addImage(image: img, size: 16)
+        btn.br_text.accept("")
+        btn.setRippleColor(color: MyColors.gi.white.withAlphaComponent(0.4))
+        return btn
+    }
 
 }

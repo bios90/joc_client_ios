@@ -25,6 +25,7 @@ class MyRequest
         let headers:HTTPHeaders =
             [
                 "Accept": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded",
                 "App-Env": "ios",
                 "Authorization": "Bearer \(token)"
         ]
@@ -40,30 +41,39 @@ extension MyRequest
     {
         let url = self.base_url+self.path
         
-        print("Will make request to url \n\n\n ***** \(url) ***** \n\n\n")
-        
         return Observable<AFDataResponse<Data?>>.create
             {  observer in
                 
-                let request = AF.request(url,method: self.method,parameters: self.getParamsWithoutNil(),headers: MyRequest.getHeaders())
+                let headers = MyRequest.getHeaders()
+                let redirector = Redirector(behavior: Redirector.Behavior.modify(
+                { (task, urlRequest, resp) in
+                    var urlRequest = urlRequest
+                    headers.forEach
+                        { header in
+                            urlRequest.addValue(header.value, forHTTPHeaderField: header.name)
+                    }
+                    return urlRequest
+                }))
+                
+                let request = AF.request(url,method: self.method,parameters: self.getParamsWithoutNil(),headers: headers)
                     .response(completionHandler:
                         { response in
                             
-                            if let data = response.data 
-                            {
-                                print("***** here2222 *****")
-                                let str = String(decoding: data, as: UTF8.self)
-                                print(str)
-                            }
+//                            if let data = response.data
+//                            {
+//                                let str = String(decoding: data, as: UTF8.self)
+//                            }
                             
                             observer.onNext(response)
                             observer.onCompleted()
                     })
+                    .redirect(using: redirector)
                     .cURLDescription(calling:
                         { curl in
                             
                             print(curl)
                     })
+                
                 
                 return Disposables.create
                     {
@@ -250,5 +260,30 @@ extension MyRequest
         return req
     }
     
+    
+    static func getReqUserOrders(offset:Int,limit:Int,statuses:String = "paid,process,ready,done,canceled")->MyRequest
+    {
+        let req = MyRequest()
+        req.path = Constants.Urls.URL_ORDER_GET_USER_ORDERS
+        req.method = .get
+        req.parameters =
+            [
+                "offset" : String(offset),
+                "limit" :String(limit),
+                "status": statuses
+        ]
+        
+        return req
+    }
+    
+    static func getReqLoadOrderById(order_id:Int)->MyRequest
+    {
+        let req = MyRequest()
+        req.path = Constants.Urls.URL_ORDER_GET_INFO+"/\(order_id)"
+        req.method = .get
+        req.parameters = [:]
+        
+        return req
+    }
     
 }

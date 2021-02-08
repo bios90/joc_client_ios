@@ -241,12 +241,14 @@ class ViewProductSettings:BaseViewController
     {
         if let weight = basket_item.weight,let weights = basket_item.product.weights
         {
-            let pos = weights.firstIndex(of:weight)!
+
+            let pos = weights.firstIndex(where:
+            { $0.value == weight.value })
             let selected_pos = bubbles_weight?.bubbles_view.getSelected()
             
-            if(pos != selected_pos)
+            if(pos != selected_pos && pos != nil)
             {
-                bubbles_weight?.bubbles_view.setSelected(selected: [pos])
+                bubbles_weight?.bubbles_view.setSelected(selected: [pos!])
             }
         }
         
@@ -266,10 +268,15 @@ class ViewProductSettings:BaseViewController
             
             if let milk = basket_item.milk
             {
-                let pos = milks.firstIndex(of:milk)!
-                if pos != selected
+                let pos = milks.firstIndex(where:{ $0.value == milk.value })
+                
+                if pos != selected && pos != nil
                 {
-                    bubbles_milks?.bubbles_view.setSelected(selected: [pos])
+                    bubbles_milks?.bubbles_view.setSelected(selected: [pos!])
+                }
+                else
+                {
+                    bubbles_milks?.bubbles_view.setSelected(selected: [])
                 }
             }
             else

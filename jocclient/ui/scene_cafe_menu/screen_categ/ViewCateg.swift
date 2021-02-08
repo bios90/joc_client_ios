@@ -23,6 +23,11 @@ class ViewCateg:BaseViewController
         return lbl
     }()
     
+    let img_arrow_back:BtnRipple =
+    {
+        return ViewsHelper.getArrowBack()
+    }()
+    
     let tb_products:UITableView =
     {
         let tb = UITableView()
@@ -43,6 +48,7 @@ class ViewCateg:BaseViewController
         setBaseVmAction(base_vm: vm_categ)
         setupViewsMy()
         setEvents()
+        setListeners()
     }
     
     private func setEvents()
@@ -76,6 +82,7 @@ class ViewCateg:BaseViewController
         
         self.view.addSubview(view_top)
         view_top.addSubview(lbl_title)
+        view_top.addSubview(img_arrow_back)
         self.view.addSubview(tb_products)
         
         view_top.snp.makeConstraints(
@@ -85,6 +92,14 @@ class ViewCateg:BaseViewController
                 make.centerX.width.equalToSuperview()
                 make.top.equalToSuperview()
                 make.height.equalTo(height)
+        })
+        
+        img_arrow_back.snp.makeConstraints(
+            { make in
+                
+                make.width.height.equalTo(28)
+                make.left.equalToSuperview().offset(10)
+                make.bottom.equalToSuperview().offset(-12)
         })
         
         lbl_title.snp.makeConstraints(
@@ -101,6 +116,13 @@ class ViewCateg:BaseViewController
                 make.bottom.equalToSuperview().offset(-12)
                 make.left.right.equalToSuperview()
         })
+    }
+    
+    private func setListeners()
+    {
+        img_arrow_back.addAction {
+            self.vm_categ.clickedArrowBack()
+        }
     }
 }
 

@@ -76,12 +76,17 @@ extension MyColors
         return getGradient(color1: MyColors.gi.orange_dark , color2: MyColors.gi.orange_light, horizontal: horizontal)
     }
     
-    func getGradient(color1:UIColor,color2:UIColor, horizontal:Bool)->CAGradientLayer
+    func getGradient(color1:UIColor,color2:UIColor, horizontal:Bool,points:([Double])? = nil)->CAGradientLayer
     {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
         gradientLayer.locations = [0, 1]
-        if(horizontal)
+        if let points = points
+        {
+            gradientLayer.startPoint = CGPoint(x: points[0], y: points[1])
+            gradientLayer.endPoint = CGPoint(x: points[2], y: points[3])
+        }
+        else if(horizontal)
         {
             gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
             gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)

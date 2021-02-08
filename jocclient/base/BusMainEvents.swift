@@ -15,4 +15,7 @@ class BusMainEvents
     
     let ps_basket_item_added:PublishSubject<ModelBasketItem> = PublishSubject.init()
     let ps_basket_item_updated:PublishSubject<ModelBasketItem> = PublishSubject.init()
+    
+    let ps_order_created:PublishSubject<Int> = PublishSubject.init()
+    let ps_finish_vm_of_type:PublishSubject<[Any.Type]>  = PublishSubject.init()
 }

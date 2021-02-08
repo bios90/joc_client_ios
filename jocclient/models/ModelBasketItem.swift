@@ -1,6 +1,6 @@
 import Foundation
 
-class ModelBasketItem:NSObject
+class ModelBasketItem:NSObject,Codable
 {
     var product:ModelProduct
     var sugar = 0
@@ -14,6 +14,26 @@ class ModelBasketItem:NSObject
         self.weight = product.weights?[safe:0]
     }
     
+    required public init(from decoder: Decoder) throws
+    {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.product = try! container.decodeObject(type: ModelProduct.self, from: .product)!
+        self.sugar = (try? container.decodeInt(from: .sugar)) ?? 0
+        self.weight = try? container.decodeObject(type: ModelAddableValue.self, from: .weight)
+        self.milk = try? container.decodeObject(type: ModelAddableValue.self, from: .milk)
+        self.addables = (try? container.decodeArray(type: ModelAddableValue.self, from: .addables)) ?? []
+    }
+    
+    enum CodingKeys: String, CodingKey
+    {
+        case product
+        case sugar
+        case weight
+        case milk
+        case addables = "additive"
+    }
+    
     func getSelectedAddablesPoses()->[Int]
     {
         var posses:[Int] = []
@@ -21,7 +41,7 @@ class ModelBasketItem:NSObject
         addables.forEach(
             { selected in
                 
-                if let pos = product.addables?.firstIndex(of: selected)
+                if let pos = product.addables?.firstIndex(where: {$0.value == selected.value} )
                 {
                     posses.append(pos)
                 }

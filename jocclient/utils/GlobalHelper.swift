@@ -4,7 +4,9 @@ import RxCocoa
 
 func getStatusBarHeight() -> CGFloat
 {
-    return UIApplication.shared.statusBarFrame.height
+    let status_bar_height = UIApplication.shared.statusBarFrame.height
+    print("Status bar height \(status_bar_height)")
+    return status_bar_height
 }
 
 func runActionWithDelay(milliseconds:Int, action:@escaping ()->Void)->Disposable

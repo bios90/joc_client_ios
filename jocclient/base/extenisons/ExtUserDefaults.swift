@@ -1,9 +1,9 @@
-//
-//  ExtUserDefaults.swift
-//  jocclient
-//
-//  Created by Филипп Бесядовский on 14.10.2020.
-//  Copyright © 2020 justordercompany. All rights reserved.
-//
+import UIKit
 
-import Foundation
+extension UserDefaults
+{
+    func hasKey(key: String) -> Bool
+    {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
+}

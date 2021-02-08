@@ -10,6 +10,12 @@
 		67CCA6C1D16C03737F32BD24 /* Pods_jocclient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 581F514B61FA08AC2DD55159 /* Pods_jocclient.framework */; };
 		E408444825CA23710068D917 /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E408444725CA23710068D917 /* PaymentManager.swift */; };
 		E408444A25CA2C340068D917 /* RespOrderCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E408444925CA2C340068D917 /* RespOrderCreation.swift */; };
+		E40965ED25CC61D700BA2830 /* CellReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40965EC25CC61D700BA2830 /* CellReview.swift */; };
+		E40965EF25CC69F400BA2830 /* ModelReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40965EE25CC69F400BA2830 /* ModelReview.swift */; };
+		E40965F125CC9A6000BA2830 /* CellOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40965F025CC9A6000BA2830 /* CellOrder.swift */; };
+		E40965F325CCA19300BA2830 /* ModelOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40965F225CCA19300BA2830 /* ModelOrder.swift */; };
+		E40965F525CCA20100BA2830 /* TypeOrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40965F425CCA20100BA2830 /* TypeOrderStatus.swift */; };
+		E40965F725CCAC7D00BA2830 /* RespOrders.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40965F625CCAC7D00BA2830 /* RespOrders.swift */; };
 		E40BAD1F258D644F0002A11D /* TypeCafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40BAD1E258D644F0002A11D /* TypeCafe.swift */; };
 		E415413425C6C72800A40F9E /* TypeTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415413325C6C72800A40F9E /* TypeTab.swift */; };
 		E415413725C6E84100A40F9E /* FactoryOrderDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E415413625C6E84100A40F9E /* FactoryOrderDialog.swift */; };
@@ -74,6 +80,7 @@
 		E4B1B032253B8B3F0082E464 /* ExtUiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1B031253B8B3F0082E464 /* ExtUiViewController.swift */; };
 		E4B1BF8D25C30452009D1561 /* ModelBasketItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B1BF8C25C30452009D1561 /* ModelBasketItem.swift */; };
 		E4B24DC525CB050E003E02C5 /* RespOrderPay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B24DC425CB050E003E02C5 /* RespOrderPay.swift */; };
+		E4B5192925CF205E00A5A40D /* RespOrderSingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B5192825CF205E00A5A40D /* RespOrderSingle.swift */; };
 		E4B739DD25B48305000A9AA1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B739DC25B48305000A9AA1 /* LocationManager.swift */; };
 		E4B739DF25B4A399000A9AA1 /* ExtGoogleMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B739DE25B4A399000A9AA1 /* ExtGoogleMap.swift */; };
 		E4B739E225B4BF51000A9AA1 /* CoordinatorCafeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B739E125B4BF51000A9AA1 /* CoordinatorCafeMenu.swift */; };
@@ -166,6 +173,12 @@
 		581F514B61FA08AC2DD55159 /* Pods_jocclient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_jocclient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E408444725CA23710068D917 /* PaymentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		E408444925CA2C340068D917 /* RespOrderCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespOrderCreation.swift; sourceTree = "<group>"; };
+		E40965EC25CC61D700BA2830 /* CellReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellReview.swift; sourceTree = "<group>"; };
+		E40965EE25CC69F400BA2830 /* ModelReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReview.swift; sourceTree = "<group>"; };
+		E40965F025CC9A6000BA2830 /* CellOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellOrder.swift; sourceTree = "<group>"; };
+		E40965F225CCA19300BA2830 /* ModelOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelOrder.swift; sourceTree = "<group>"; };
+		E40965F425CCA20100BA2830 /* TypeOrderStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeOrderStatus.swift; sourceTree = "<group>"; };
+		E40965F625CCAC7D00BA2830 /* RespOrders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespOrders.swift; sourceTree = "<group>"; };
 		E40BAD1E258D644F0002A11D /* TypeCafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCafe.swift; sourceTree = "<group>"; };
 		E415413325C6C72800A40F9E /* TypeTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTab.swift; sourceTree = "<group>"; };
 		E415413625C6E84100A40F9E /* FactoryOrderDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryOrderDialog.swift; sourceTree = "<group>"; };
@@ -228,6 +241,7 @@
 		E4B1B031253B8B3F0082E464 /* ExtUiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtUiViewController.swift; sourceTree = "<group>"; };
 		E4B1BF8C25C30452009D1561 /* ModelBasketItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBasketItem.swift; sourceTree = "<group>"; };
 		E4B24DC425CB050E003E02C5 /* RespOrderPay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespOrderPay.swift; sourceTree = "<group>"; };
+		E4B5192825CF205E00A5A40D /* RespOrderSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespOrderSingle.swift; sourceTree = "<group>"; };
 		E4B739DC25B48305000A9AA1 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E4B739DE25B4A399000A9AA1 /* ExtGoogleMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtGoogleMap.swift; sourceTree = "<group>"; };
 		E4B739E125B4BF51000A9AA1 /* CoordinatorCafeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorCafeMenu.swift; sourceTree = "<group>"; };
@@ -412,6 +426,8 @@
 				E4B739FF25B4ECE2000A9AA1 /* RespCafeSingle.swift */,
 				E408444925CA2C340068D917 /* RespOrderCreation.swift */,
 				E4B24DC425CB050E003E02C5 /* RespOrderPay.swift */,
+				E40965F625CCAC7D00BA2830 /* RespOrders.swift */,
+				E4B5192825CF205E00A5A40D /* RespOrderSingle.swift */,
 			);
 			path = responses;
 			sourceTree = "<group>";
@@ -430,6 +446,8 @@
 				E42D042A25B351C700B8F6CD /* CellCafe.swift */,
 				E45817BF25BE10200021ED9F /* CellProduct.swift */,
 				E4ED47C225C4EA3F004C606E /* CellBasketItem.swift */,
+				E40965EC25CC61D700BA2830 /* CellReview.swift */,
+				E40965F025CC9A6000BA2830 /* CellOrder.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -735,6 +753,7 @@
 				E4BBD541258E81A300194D92 /* TypeSortDirection.swift */,
 				E4B73A0525B4FDA2000A9AA1 /* TypeProduct.swift */,
 				E415413325C6C72800A40F9E /* TypeTab.swift */,
+				E40965F425CCA20100BA2830 /* TypeOrderStatus.swift */,
 			);
 			path = enums;
 			sourceTree = "<group>";
@@ -759,6 +778,8 @@
 				E4B73A0325B4FD13000A9AA1 /* ModelProduct.swift */,
 				E4B9CE1525B5DB7C00A8BF90 /* ModelMenu.swift */,
 				E4B1BF8C25C30452009D1561 /* ModelBasketItem.swift */,
+				E40965EE25CC69F400BA2830 /* ModelReview.swift */,
+				E40965F225CCA19300BA2830 /* ModelOrder.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -969,6 +990,7 @@
 				E41B6398253372E80002C933 /* MyFonts.swift in Sources */,
 				E4BFDCE3258FF83F00327566 /* LaCafePopup.swift in Sources */,
 				E4598FD12537964E003D1AFA /* LocalData.swift in Sources */,
+				E40965ED25CC61D700BA2830 /* CellReview.swift in Sources */,
 				E4C6BE8D253655CA00566563 /* ExtDate.swift in Sources */,
 				E4B739DD25B48305000A9AA1 /* LocationManager.swift in Sources */,
 				E41B639F253376540002C933 /* FawStrings.swift in Sources */,
@@ -997,16 +1019,20 @@
 				E4598FC8253777DC003D1AFA /* BaseResponse.swift in Sources */,
 				E41B63AC2533B09A0002C933 /* ExtTextField.swift in Sources */,
 				E415413425C6C72800A40F9E /* TypeTab.swift in Sources */,
+				E4B5192925CF205E00A5A40D /* RespOrderSingle.swift in Sources */,
 				E41B63A82533ABBC0002C933 /* LaAuth.swift in Sources */,
 				E4BBD53E258E809D00194D92 /* ReqCafes.swift in Sources */,
 				E47511D625C21DB300B24A05 /* BubbleView.swift in Sources */,
 				E4C6BE872536496600566563 /* RequestError.swift in Sources */,
 				E41B63A5253380280002C933 /* ExtView.swift in Sources */,
 				E4BBD544258E941300194D92 /* RespCafes.swift in Sources */,
+				E40965EF25CC69F400BA2830 /* ModelReview.swift in Sources */,
 				E4B739FE25B4CB81000A9AA1 /* ViewWrapperCafeMenu.swift in Sources */,
+				E40965F525CCA20100BA2830 /* TypeOrderStatus.swift in Sources */,
 				E4BB6C3525325C9000045EDD /* FactoryList.swift in Sources */,
 				E4B739F525B4CA15000A9AA1 /* FactoryBasket.swift in Sources */,
 				E4B73A0625B4FDA2000A9AA1 /* TypeProduct.swift in Sources */,
+				E40965F125CC9A6000BA2830 /* CellOrder.swift in Sources */,
 				E4B739E725B4C49B000A9AA1 /* VmCafePage.swift in Sources */,
 				E4B24DC525CB050E003E02C5 /* RespOrderPay.swift in Sources */,
 				E41B63A325337F100002C933 /* ImgInRoundShadow.swift in Sources */,
@@ -1014,6 +1040,7 @@
 				E4BB6C272532551400045EDD /* FactoryMap.swift in Sources */,
 				E4BB6C3325325B4F00045EDD /* ViewProfile.swift in Sources */,
 				E48F241A253CFE7B0053B904 /* FactoryFilter.swift in Sources */,
+				E40965F325CCA19300BA2830 /* ModelOrder.swift in Sources */,
 				E4B01FE825347949006ADFC7 /* ExtImageView.swift in Sources */,
 				E4BB6C292532570D00045EDD /* ViewMap.swift in Sources */,
 				E4B739E225B4BF51000A9AA1 /* CoordinatorCafeMenu.swift in Sources */,
@@ -1032,6 +1059,7 @@
 				E4B739DF25B4A399000A9AA1 /* ExtGoogleMap.swift in Sources */,
 				E4B01FEC25347B2C006ADFC7 /* LaDialogUniversal.swift in Sources */,
 				E4ED47C125C4E371004C606E /* BasketManager.swift in Sources */,
+				E40965F725CCAC7D00BA2830 /* RespOrders.swift in Sources */,
 				E415413925C6E84D00A40F9E /* ViewOrderDialog.swift in Sources */,
 				E4B739EB25B4C503000A9AA1 /* FactoryCafePage.swift in Sources */,
 				E4C6BE90253655F300566563 /* DateManager.swift in Sources */,

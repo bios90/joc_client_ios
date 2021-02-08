@@ -30,12 +30,14 @@ class ViewTabWrapper:BaseTabBarController
         setEvents()
         setListeners()
         
+        
         btn_filter.snp.makeConstraints(
             { make in
                 
                 make.width.height.equalTo(44)
                 make.right.equalToSuperview().offset(-12)
-                make.bottom.equalToSuperview().offset(-64)
+                let bottom_padding = self.tabBar.frame.height ?? 49.0
+                make.bottom.equalToSuperview().offset(-(bottom_padding + getBottomSafeInset() + 12))
         })
     }
     

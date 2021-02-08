@@ -52,5 +52,12 @@ class LaMarker:UIView
         })
         
         lbl.text = cafe.name
+        
+        if(cafe.can_order != true)
+        {
+            let image = MyImage.img_marker.getImage().setColorMy(MyColors.gi.gray3)
+                .stroked(with: MyColors.gi.orange, thickness: 6)
+            self.img.image = image
+        }
     }
 }

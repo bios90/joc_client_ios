@@ -69,10 +69,10 @@ class CoordinatorMain:BaseCoordinator
         vc.present(vc_filter, animated: true, completion: nil)
     }
     
-    func toCafePage(cafe_id:Int)
+    func toCafePage(cafe_id:Int,order_id:Int? = nil)
     {
         let coordinator_cafe_menu = CoordinatorCafeMenu(nav_controller: self.navigation_controller)
-        coordinator_cafe_menu.startMain(cafe_id: cafe_id)
+        coordinator_cafe_menu.startMain(cafe_id: cafe_id,order_id: order_id)
     }
 }
 
@@ -89,6 +89,15 @@ extension CoordinatorMain
             })
             .disposed(by: dispose_bag)
         
+        vm_profile.ps_clicked_repeat_order
+            .subscribe(onNext:
+                { order in
+                    
+                    guard let cafe_id = order.cafe?.id, let order_id = order.id else { return }
+                    self.toCafePage(cafe_id: cafe_id,order_id: order_id)
+            })
+            .disposed(by: dispose_bag)
+        
         vm_tab_wrapper.ps_clicked_filter
             .subscribe(onNext:
                 {
@@ -99,9 +108,18 @@ extension CoordinatorMain
         vm_map.ps_clicked_cafe
             .subscribe(onNext:
                 { cafe_id in
-                     
+                    
                     self.toCafePage(cafe_id: cafe_id)
             })
-        .disposed(by: dispose_bag)
+            .disposed(by: dispose_bag)
+        
+        
+        vm_list.ps_clicked_cafe
+            .subscribe(onNext:
+                { cafe_id in
+                    
+                    self.toCafePage(cafe_id: cafe_id)
+            })
+            .disposed(by: dispose_bag)
     }
 }

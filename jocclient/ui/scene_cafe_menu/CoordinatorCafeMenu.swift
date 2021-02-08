@@ -1,7 +1,10 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 class CoordinatorCafeMenu:BaseCoordinator
 {
+    static let ps_clicked_arrow_back:PublishSubject<Void> = PublishSubject.init()
 
     let vm_cafe_page:VmCafePage
     let vm_categ_hot:VmCateg!
@@ -25,7 +28,7 @@ class CoordinatorCafeMenu:BaseCoordinator
         setEvents()
     }
     
-    func startMain(cafe_id:Int)
+    func startMain(cafe_id:Int,order_id:Int?)
     {
         vc_wrapper_cafe_menu.tabBar.barTintColor = MyColors.gi.white
         let tab_bar = vc_wrapper_cafe_menu.tabBar
@@ -35,10 +38,22 @@ class CoordinatorCafeMenu:BaseCoordinator
         navigation_controller.pushViewController(vc_wrapper_cafe_menu, animated: true)
         
         vm_wrapper_cafe_menu.br_cafe_id.accept(cafe_id)
+        
+        if let order_id = order_id
+        {
+            vm_wrapper_cafe_menu.br_order_id_to_repeat.accept(order_id)
+        }
     }
     
     private func setEvents()
     {
+        CoordinatorCafeMenu.ps_clicked_arrow_back
+            .subscribe(onNext:
+                {
+                    BusMainEvents.gi.ps_finish_vm_of_type.onNext([VmOrderDialog.self, VmWrapperCafeMenu.self])
+            })
+            .disposed(by: dispose_bag)
+        
         vm_wrapper_cafe_menu.br_initial_cafe_loaded
             .subscribe(onNext:
                 { cafe in

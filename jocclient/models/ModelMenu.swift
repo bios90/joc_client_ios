@@ -20,4 +20,26 @@ class ModelMenu:Codable
         case cold_drinks = "cold"
         case snacks = "dessert"
     }
+    
+    func getAllItems()->[ModelProduct]
+    {
+        var items:[ModelProduct] = []
+        
+        if let hot_drinks = self.hot_drinks, hot_drinks.count > 0
+        {
+            items.append(contentsOf: hot_drinks)
+        }
+        
+        if let cold_drinks = self.cold_drinks, cold_drinks.count > 0
+        {
+            items.append(contentsOf: cold_drinks)
+        }
+        
+        if let snacks = self.snacks, snacks.count > 0
+        {
+            items.append(contentsOf: snacks)
+        }
+        
+        return items
+    }
 }

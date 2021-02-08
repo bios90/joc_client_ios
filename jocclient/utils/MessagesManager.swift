@@ -315,6 +315,7 @@ extension MessagesManager
         attributes.hapticFeedbackType = .success
         
         attributes.screenBackground = .color(color: .init( MyColors.gi.black.withAlphaComponent(0.5)))
+        attributes.positionConstraints.verticalOffset = -getBottomSafeInset()
 //        attributes.screenBackground = .color(color: .init(.orange))
         
         return attributes

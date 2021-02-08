@@ -1,4 +1,5 @@
 import UIKit
+import Lightbox
 
 extension UIViewController
 {
@@ -25,5 +26,40 @@ extension UIViewController
             
             self.dismiss(animated: animated, completion: nil)
         }
+    }
+    
+    func showImageScroller(objects: [ObjWithImage], text: String? = nil, goToPage: Int? = nil)
+    {
+        LightboxConfig.CloseButton.text = MyStrings.close.localized()
+        LightboxConfig.InfoLabel.ellipsisText = MyStrings.more.localized()
+        LightboxConfig.PageIndicator.enabled = true
+        LightboxConfig.hideStatusBar = true
+        
+        var light_box_images:[LightboxImage] = []
+        
+        var text_formatted = ""
+        if let text = text {
+            text_formatted = text.replacingOccurrences(of: "\n", with: " ")
+        }
+        
+        objects.forEach({ obj in
+            if let img = obj.image {
+                light_box_images.append(LightboxImage(image: img, text: text_formatted))
+            } else if let url = obj.url, let url_url = URL(string: url) {
+                light_box_images.append(LightboxImage(imageURL: url_url, text: text_formatted))
+            }
+        })
+        
+        guard  light_box_images.count > 0 else { return }
+        
+        let controller = LightboxController(images: light_box_images)
+        controller.modalPresentationStyle = .fullScreen
+        controller.dynamicBackground = true
+        
+        if goToPage != nil {
+            controller.goTo(goToPage!)
+        }
+        
+        present(controller, animated: true, completion: nil)
     }
 }

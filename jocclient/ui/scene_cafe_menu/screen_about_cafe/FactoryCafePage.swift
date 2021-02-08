@@ -11,17 +11,19 @@ class FactoryCafePage
     let scroll :UIScrollView =
     {
         let scroll = ViewsHelper.getDefScroll()
-        scroll.backgroundColor = .blue
         return scroll
     }()
     
-    let view_top:ViewForGradientBg =
+    let view_top:UIView =
     {
-        let view = ViewForGradientBg()
-        let grad_view = MyColors.gi.getOrangeGradient(horizontal: true)
-        grad_view.frame = view.bounds
-        view.layer.insertSublayer(grad_view,at: 0)
+        let view = UIView()
+        view.backgroundColor = .random
         return view
+    }()
+    
+    let img_arrow_back:BtnRipple =
+    {
+        return ViewsHelper.getArrowBack()
     }()
     
     let view_cafe_logo:ImgInRoundShadow =
@@ -49,20 +51,19 @@ class FactoryCafePage
         return cosmos
     }()
     
-    let lbl_description:UITextView =
+    let tf_description:UITextView =
     {
-        let lbl = UITextView()
-        lbl.textColor = MyColors.gi.white
-        lbl.textAlignment = .left
-        lbl.font = MyFonts.gi.reg_xs
-        lbl.backgroundColor = MyColors.gi.transparent
-        lbl.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        lbl.isScrollEnabled = false
-        lbl.isEditable = false
-        //        lbl.numberOfLines = 0
-        lbl.textContainerInset = UIEdgeInsets.zero
-        lbl.textContainer.lineFragmentPadding = 0
-        return lbl
+        let tv = UITextView()
+        tv.textColor = MyColors.gi.white
+        tv.textAlignment = .left
+        tv.font = MyFonts.gi.reg_xs
+        tv.backgroundColor = MyColors.gi.transparent
+        tv.isScrollEnabled = false
+        tv.isEditable = false
+        tv.isSelectable = false
+        tv.textContainerInset = UIEdgeInsets.zero
+        tv.textContainer.lineFragmentPadding = 0
+        return tv
     }()
     
     let scroll_image:UIScrollView =
@@ -117,6 +118,20 @@ class FactoryCafePage
         return lbl
     }()
     
+    let tb_reviews:UITableView =
+    {
+        let tb = UITableView()
+        tb.showsVerticalScrollIndicator = false
+        tb.tableFooterView = UIView()
+        tb.register(CellReview.self, forCellReuseIdentifier: CellReview.reuse_id)
+        tb.rowHeight = UITableView.automaticDimension
+        tb.estimatedRowHeight = 1000
+        tb.separatorInset = UIEdgeInsets.zero
+        tb.separatorStyle = UITableViewCell.SeparatorStyle.none
+        tb.bounces = false
+        tb.backgroundColor = .white
+        return tb
+    }()
     
     
     init(vc:BaseViewController)
@@ -130,17 +145,20 @@ class FactoryCafePage
         self.vc.view.backgroundColor = MyColors.gi.green
         
         self.vc.view.addSubview(scroll)
-        scroll.addSubview(view_top)
+//        scroll.addSubview(view_top)
+        self.vc.view.addSubview(view_top)
         view_top.addSubview(view_cafe_logo)
+        view_top.addSubview(img_arrow_back)
         view_top.addSubview(lbl_name)
         view_top.addSubview(rating)
-        view_top.addSubview(lbl_description)
+        view_top.addSubview(tf_description)
         view_top.addSubview(scroll_image)
         view_top.addSubview(lbl_adress)
         view_top.addSubview(lbl_clock)
         view_top.addSubview(lbl_time)
         view_top.addSubview(lbl_distance)
         view_top.addSubview(lbl_location_arrow)
+        self.vc.view.addSubview(tb_reviews)
         
         scroll.snp.makeConstraints(
             { make in
@@ -153,24 +171,32 @@ class FactoryCafePage
                 
                 make.centerX.width.equalToSuperview()
                 make.top.equalToSuperview().offset(-getStatusBarHeight())
-                make.bottom.equalTo(lbl_clock.snp.bottom).offset(36)
+//                make.bottom.equalTo(lbl_location_arrow.snp.bottom).offset(36)
         })
         
-//        view_top.fitHeightToLastChild(offset: 12)
+        view_top.fitHeightToLastChild(offset: 12)
         
         view_cafe_logo.snp.makeConstraints(
             { make in
                 
-                make.top.equalToSuperview().offset(12+getStatusBarHeight())
+                make.top.equalToSuperview().offset(12+(getStatusBarHeight()*2))
                 make.right.equalToSuperview().offset(-12)
                 make.width.height.equalTo(FactoryCafePage.logo_size)
+        })
+        
+        img_arrow_back.snp.makeConstraints(
+            { make in
+                
+                make.width.height.equalTo(28)
+                make.left.equalToSuperview().offset(10)
+                make.centerY.equalTo(lbl_name)
         })
         
         lbl_name.snp.makeConstraints(
             { make in
                 
-                make.left.equalToSuperview().offset(12)
-                make.top.equalToSuperview().offset(12+getStatusBarHeight())
+                make.left.equalTo(img_arrow_back.snp.right).offset(8)
+                make.top.equalToSuperview().offset(12+(getStatusBarHeight()*2))
         })
         
         rating.snp.makeConstraints(
@@ -181,7 +207,7 @@ class FactoryCafePage
                 make.top.equalTo(lbl_name.snp.bottom).offset(4)
         })
         
-        lbl_description.snp.makeConstraints(
+        tf_description.snp.makeConstraints(
             { make in
                 
                 make.left.equalToSuperview().offset(12)
@@ -193,7 +219,7 @@ class FactoryCafePage
         scroll_image.snp.makeConstraints(
             { make in
                 
-                make.top.equalTo(lbl_description.snp.bottom).offset(8)
+                make.top.equalTo(tf_description.snp.bottom).offset(8)
                 make.left.width.equalToSuperview()
                 make.height.equalTo(FactoryCafePage.square_img_size)
         })
@@ -235,6 +261,13 @@ class FactoryCafePage
         })
         
         resetLabelImageCut()
+        
+        tb_reviews.snp.makeConstraints(
+            { make in
+                
+                make.top.equalTo(view_top.snp.bottom)
+                make.left.right.bottom.equalToSuperview()
+        })
     }
     
     private func resetLabelImageCut()
@@ -243,6 +276,6 @@ class FactoryCafePage
         let y = -((FactoryCafePage.logo_size / 2) + (FactoryCafePage.image_top_margin ))
         
         let imageFrame = UIBezierPath(roundedRect: CGRect.init(x: x, y: y, width: FactoryCafePage.logo_size + 8, height: FactoryCafePage.logo_size + 8), cornerRadius:CGFloat(Double(FactoryCafePage.logo_size) / 2))
-        lbl_description.textContainer.exclusionPaths = [imageFrame]
+        tf_description.textContainer.exclusionPaths = [imageFrame]
     }
 }

@@ -12,7 +12,7 @@ class FactoryProfile
         img.layer.shadowOpacity = 0.4
         img.layer.shadowRadius = 20
         img.layer.shadowOffset = CGSize(width: 0, height: 0)
-        
+        img.layer.zPosition = 10
         return img
     }()
     
@@ -127,6 +127,29 @@ class FactoryProfile
         return view
     }()
     
+    let tb_orders_items:UITableView =
+    {
+        let tb = UITableView()
+        tb.showsVerticalScrollIndicator = false
+        tb.tableFooterView = UIView()
+        tb.register(CellOrder.self, forCellReuseIdentifier: CellOrder.reuse_id)
+        tb.rowHeight = UITableView.automaticDimension
+        tb.estimatedRowHeight = 1000
+        tb.separatorInset = UIEdgeInsets.zero
+        tb.separatorStyle = UITableViewCell.SeparatorStyle.none
+        tb.bounces = false
+        tb.backgroundColor = .white
+        tb.contentInset = UIEdgeInsets(top: 22, left: 0, bottom: 22, right: 0)
+        return tb
+    }()
+    
+    let refresh_control: UIRefreshControl =
+    {
+        let rc = ViewsHelper.getDefaultRefreshControl()
+        rc.attributedTitle = NSAttributedString(string: "")
+        return rc
+    }()
+    
     init(vc:BaseViewController)
     {
         self.vc = vc
@@ -138,24 +161,27 @@ class FactoryProfile
         self.vc.view.backgroundColor = .white
         
         self.vc.view.addSubview(img_top)
-        self.vc.view.addSubview(btn_edit)
-        self.vc.view.addSubview(img_info)
-        self.vc.view.addSubview(img_avatar)
-        self.vc.view.addSubview(lbl_user_name)
-        self.vc.view.addSubview(lbl_phone)
-        self.vc.view.addSubview(lbl_cups_title)
-        self.vc.view.addSubview(lbl_orders_title)
-        self.vc.view.addSubview(lbl_reviews_title)
-        self.vc.view.addSubview(lbl_cups_count)
-        self.vc.view.addSubview(lbl_orders_count)
-        self.vc.view.addSubview(lbl_reviews_count)
+        self.img_top.addSubview(btn_edit)
+        self.img_top.addSubview(img_info)
+        self.img_top.addSubview(img_avatar)
+        self.img_top.addSubview(lbl_user_name)
+        self.img_top.addSubview(lbl_phone)
+        self.img_top.addSubview(lbl_cups_title)
+        self.img_top.addSubview(lbl_orders_title)
+        self.img_top.addSubview(lbl_reviews_title)
+        self.img_top.addSubview(lbl_cups_count)
+        self.img_top.addSubview(lbl_orders_count)
+        self.img_top.addSubview(lbl_reviews_count)
         self.vc.view.addSubview(view_auth)
+        self.vc.view.addSubview(tb_orders_items)
+        tb_orders_items.refreshControl = refresh_control
+        tb_orders_items.addSubview(refresh_control)
         
         img_top.snp.makeConstraints(
             { make in
                 
                 make.top.left.right.equalToSuperview()
-                make.height.equalTo(212)
+                make.height.equalTo(184 + getStatusBarHeight())
         })
         
         btn_edit.snp.makeConstraints(
@@ -247,6 +273,13 @@ class FactoryProfile
             { make in
                 
                 make.edges.equalToSuperview()
+        })
+        
+        tb_orders_items.snp.makeConstraints(
+            { make in
+                
+                make.top.equalTo(img_top.snp.bottom).offset(-22)
+                make.left.right.bottom.equalToSuperview()
         })
         
     }

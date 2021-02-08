@@ -18,6 +18,13 @@ class BaseViewController:UIViewController
         })
             .disposed(by: dispose_bag)
         
+        base_vm.ps_show_image_scroll
+            .subscribe(onNext:
+                { info in
+                    
+                    self.showImageScroller(objects: info.0, text: nil, goToPage: info.1)
+            }).disposed(by: dispose_bag)
+        
         self.base_vm = base_vm
     }
 }

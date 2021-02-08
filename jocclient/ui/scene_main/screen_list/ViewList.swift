@@ -37,6 +37,9 @@ class ViewList:BaseViewController
         vc_by_distance.title = MyStrings.by_distance.localized()
         vc_by_rating.title = MyStrings.by_rating.localized()
         
+        vc_by_distance.action_clicked_cafe = { self.vm_list.clickedCafe(cafe: $0) }
+        vc_by_rating.action_clicked_cafe = { self.vm_list.clickedCafe(cafe: $0) }
+        
         swipe_controller = SwipeViewController(pages: [vc_by_distance, vc_by_rating])
         
         swipe_controller.offset = 0
