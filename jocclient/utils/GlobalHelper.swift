@@ -153,13 +153,13 @@ func toJsonMy<T:Encodable>(from object:T) -> String?
     let json = String(data: jsonData, encoding: String.Encoding.utf8)
     
     return json
-
-//    guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else
-//    {
-//        return nil
-//    }
-//
-//    return String(data: data, encoding: String.Encoding.utf8)
+    
+    //    guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else
+    //    {
+    //        return nil
+    //    }
+    //
+    //    return String(data: data, encoding: String.Encoding.utf8)
 }
 
 func arrayToJsonMy(arrayObject: [Any]) -> String?
@@ -178,5 +178,13 @@ func arrayToJsonMy(arrayObject: [Any]) -> String?
         print("Array convertIntoJSON - \(error.description)")
     }
     return nil
+}
+
+func openUrl(url_str:String)
+{
+    if let url = URL(string: url_str)
+    {
+        UIApplication.shared.open(url)
+    }
 }
 

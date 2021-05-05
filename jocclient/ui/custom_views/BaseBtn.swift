@@ -61,4 +61,16 @@ class BaseBtn:UIButton
     {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setEdgeInsets(left:Int?,top:Int?,right:Int?,bottom:Int?)
+    {
+        let current_insets = self.contentEdgeInsets
+        
+        let left = left ?? Int(current_insets.left)
+        let top = top ?? Int(current_insets.top)
+        let right = right ?? Int(current_insets.right)
+        let bottom = bottom ?? Int(current_insets.bottom)
+        
+        self.contentEdgeInsets = UIEdgeInsets(top: CGFloat(top),left: CGFloat(left),bottom: CGFloat(bottom),right: CGFloat(right))
+    }
 }

@@ -59,20 +59,20 @@ extension MyRequest
                     .response(completionHandler:
                         { response in
                             
-//                            if let data = response.data
-//                            {
-//                                let str = String(decoding: data, as: UTF8.self)
-//                            }
+                            //                            if let data = response.data
+                            //                            {
+                            //                                let str = String(decoding: data, as: UTF8.self)
+                            //                            }
                             
                             observer.onNext(response)
                             observer.onCompleted()
                     })
                     .redirect(using: redirector)
-                    .cURLDescription(calling:
-                        { curl in
-                            
-                            print(curl)
-                    })
+//                    .cURLDescription(calling:
+//                        { curl in
+//                            
+//                            print(curl)
+//                    })
                 
                 
                 return Disposables.create
@@ -192,7 +192,7 @@ extension MyRequest
         return req
     }
     
-    static func getReqOrderCreate(date:String,comment:String?,items:String)->MyRequest
+    static func getReqOrderCreate(date:String,cafe_id:Int,comment:String?,items:String)->MyRequest
     {
         let req = MyRequest()
         req.path = Constants.Urls.URL_ORDER_CREATE
@@ -201,7 +201,8 @@ extension MyRequest
             [
                 "date" : date,
                 "comment" : comment,
-                "items" : items
+                "items" : items,
+                "cafeId": String(cafe_id)
         ]
         
         return req
@@ -231,7 +232,8 @@ extension MyRequest
         
         if let rating = rating
         {
-            req.parameters["rating"] = String(rating)
+            //Todo add rating later when loaded
+//            req.parameters["rating"] = String(rating)
         }
         
         if let sort_by = sort_by
@@ -282,6 +284,35 @@ extension MyRequest
         req.path = Constants.Urls.URL_ORDER_GET_INFO+"/\(order_id)"
         req.method = .get
         req.parameters = [:]
+        
+        return req
+    }
+    
+    static func getReqMakeOrderReview(order_id:Int,cafe_id:Int,text:String?,rating:Int)->MyRequest
+    {
+        let req = MyRequest()
+        req.path = Constants.Urls.URL_ORDER_MAKE_REVIEW+"/\(cafe_id)"
+        req.method = .put
+        req.parameters =
+            [
+                "order_id" : String(order_id),
+                "text": text,
+                "rating": String(rating)
+        ]
+        
+        return req
+    }
+    
+    static func getReqCancelOrder(order_id:Int)->MyRequest
+    {
+        let req = MyRequest()
+        req.path = Constants.Urls.URL_ORDER_CANCEL+"/\(order_id)"
+        req.method = .put
+        req.parameters =
+            [
+                "order_id" : String(order_id),
+                "status": TypeOrderStatus.canceled.rawValue
+        ]
         
         return req
     }

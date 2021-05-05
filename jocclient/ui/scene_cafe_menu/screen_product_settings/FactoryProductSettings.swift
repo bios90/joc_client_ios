@@ -182,7 +182,7 @@ class FactoryProductSettings
         lbl_sum.snp.makeConstraints(
             { make in
                 
-                make.bottom.equalTo(btn_add.snp.top).offset(-8)
+                make.top.equalToSuperview().offset(16)
                 make.centerX.equalToSuperview()
         })
         

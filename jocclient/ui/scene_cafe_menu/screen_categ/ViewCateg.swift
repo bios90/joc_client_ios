@@ -39,6 +39,7 @@ class ViewCateg:BaseViewController
         tb.separatorInset = UIEdgeInsets.zero
         tb.separatorStyle = UITableViewCell.SeparatorStyle.none
         tb.bounces = false
+        tb.backgroundColor = MyColors.gi.white
         return tb
     }()
     
@@ -76,7 +77,7 @@ class ViewCateg:BaseViewController
     
     private func setupViewsMy()
     {
-        view.backgroundColor = MyColors.gi.white
+        self.view.backgroundColor = MyColors.gi.white
         tb_products.delegate = self
         tb_products.dataSource = self
         

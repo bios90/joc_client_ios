@@ -273,8 +273,11 @@ class FactoryFilter
         })
         
         let bubble_1 = Bubble(text: MyStrings.all.localized())
-        let bubble_2 = Bubble(text: MyStrings.cafe.localized())
+        let bubble_2 = Bubble(text: MyStrings.cafeina.localized())
         let bubble_3 = Bubble(text: MyStrings.coffee_spot.localized())
+        bubble_1.br_font.accept( MyFonts.gi.reg_xs)
+        bubble_2.br_font.accept( MyFonts.gi.reg_xs)
+        bubble_3.br_font.accept( MyFonts.gi.reg_xs)
         bubbles_cafe_type.setBubbles(bubbles: [bubble_1,bubble_2,bubble_3])
         self.bubbles_cafe_type.setSelected(selected: [0])
         

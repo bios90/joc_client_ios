@@ -29,6 +29,13 @@ class BaseTabBarController:UITabBarController
         })
             .disposed(by: dispose_bag)
         
+        base_vm.ps_dissmiss_vc.subscribe(onNext:
+            { animated in
+                
+                self.removeOrDismiss()
+        })
+            .disposed(by: dispose_bag)
+        
         self.base_vm = base_vm
     }
 }

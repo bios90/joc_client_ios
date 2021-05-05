@@ -34,6 +34,8 @@ class MyColors
     let yellow_grad_dark = colorFromHex(hex:"#F7971E")
     let yellow_grad_light = colorFromHex(hex:"#FFD200")
     
+    let biryza = colorFromHex(hex: "#255958")
+    
     
     static func colorFromHex (hex:String) -> UIColor
     {

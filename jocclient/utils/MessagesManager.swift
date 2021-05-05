@@ -147,6 +147,50 @@ extension MessagesManager
         SwiftEntryKit.dismiss(.specific(entryName: name))
     }
     
+    public static func showCovidDialog()
+    {
+        let title = LaCovidDialog.dialog_name
+        if(SwiftEntryKit.isCurrentlyDisplaying(entryNamed: title))
+        {
+            return
+        }
+        
+        var attributes = MessagesManager.getDefDialogAttributes()
+        attributes.name = title
+        
+        attributes.screenBackground = .visualEffect(style: .dark)
+        attributes.screenInteraction = .absorbTouches
+        
+        let dailog = LaCovidDialog()
+        
+        SwiftEntryKit.display(entry: dailog, using: attributes,presentInsideKeyWindow: true)
+    }
+    
+    public static func showReviewDialog(order:ModelOrder,action:@escaping ((Int,String?) -> Void))
+    {
+        let title = LaReviewDialog.dialog_name
+        if(SwiftEntryKit.isCurrentlyDisplaying(entryNamed: title))
+        {
+            return
+        }
+        
+        var attributes = MessagesManager.getDefDialogAttributes()
+        attributes.name = LaReviewDialog.dialog_name
+        
+        let widthConstraint = EKAttributes.PositionConstraints.Edge.ratio(value: 1)
+        let heightConstraint = EKAttributes.PositionConstraints.Edge.intrinsic
+        attributes.positionConstraints.size = .init(width: widthConstraint, height: heightConstraint)
+        attributes.screenInteraction = .absorbTouches
+        
+        attributes.screenBackground = .visualEffect(style: .dark)
+        
+        let dialog = LaReviewDialog()
+        dialog.bindOrder(order: order)
+        dialog.action_clicked = action
+        
+        SwiftEntryKit.display(entry: dialog, using: attributes,presentInsideKeyWindow: true)
+    }
+    
     public static func showDialogMy(builder:BuilderDialogMy)
     {
         if(SwiftEntryKit.isCurrentlyDisplaying(entryNamed: builder.dialog_name))
@@ -174,6 +218,7 @@ extension MessagesManager
         
         let widthConstraint = EKAttributes.PositionConstraints.Edge.ratio(value: 1)
         let heightConstraint = EKAttributes.PositionConstraints.Edge.ratio(value: 1)
+        
         attributes.entranceAnimation = .init(fade: .init(from: 0.0, to: 1, duration: 0.3))
         attributes.exitAnimation = .init(fade: .init(from: 1, to: 0, duration: 0.3))
         attributes.positionConstraints.size = .init(width: widthConstraint, height: heightConstraint)
@@ -280,7 +325,7 @@ extension MessagesManager
         }
     }
     
-    static func showCafeDialog(cafe:ModelCafe,action_clicked:@escaping (ModelCafe)->Void)
+    static func showCafeDialog(cafe:ModelCafe,action_clicked:@escaping (ModelCafe)->Void,action_clicked_route:@escaping (RouteInfoMy)->Void)
     {
         if(SwiftEntryKit.isCurrentlyDisplaying(entryNamed: "CafePopup"))
         {
@@ -290,7 +335,7 @@ extension MessagesManager
         var attributes = getBottomPopupAttributes()
         attributes.name = "CafePopup"
         
-        let view = LaCafePopup(cafe: cafe, action_clicked: action_clicked)
+        let view = LaCafePopup(cafe: cafe, action_clicked: action_clicked,action_clicked_route:action_clicked_route)
     
         
         SwiftEntryKit.display(entry: view, using: attributes)

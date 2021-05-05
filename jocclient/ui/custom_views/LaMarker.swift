@@ -55,8 +55,10 @@ class LaMarker:UIView
         
         if(cafe.can_order != true)
         {
-            let image = MyImage.img_marker.getImage().setColorMy(MyColors.gi.gray3)
-                .stroked(with: MyColors.gi.orange, thickness: 6)
+//            let image = MyImage.img_marker.getImage().setColorMy(MyColors.gi.gray3)
+//                .stroked(with: MyColors.gi.orange, thickness: 6)
+            let image = MyImage.img_marker.getImage().setColorMy(MyColors.gi.biryza)
+
             self.img.image = image
         }
     }

@@ -10,6 +10,8 @@ class ViewWrapperCafeMenu:BaseTabBarController
         super.init(nibName: nil, bundle: nil)
         delegate = self
         setBaseVmAction(base_vm: vm_wrapper_cafe_menu)
+        
+        self.view.backgroundColor = MyColors.gi.white
     }
     
     override func viewDidLoad()

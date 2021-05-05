@@ -36,14 +36,19 @@ class ViewProfile:BaseViewController
             self.vm_profile.clickedOffertText()
         }
         
+        factory_profile.btn_info.addAction {
+            self.vm_profile.clickedOffertText()
+        }
+        
         factory_profile.btn_edit.addAction {
             self.vm_profile.clickedEditProfile()
         }
         
-        factory_profile.refresh_control.addTarget(self, action: #selector(swipeTopRefresh), for: UIControl.Event.valueChanged)
+        factory_profile.refresh_control.attributedTitle = NSAttributedString(string: "")
+        factory_profile.refresh_control.addTarget(self, action: #selector(swipeTopRefresh), for: .valueChanged)
     }
     
-    @objc func swipeTopRefresh()
+    @objc func swipeTopRefresh(_ sender: Any)
     {
         vm_profile.swipedToRefreshOrders()
     }
@@ -90,7 +95,6 @@ class ViewProfile:BaseViewController
                     self.factory_profile.tb_orders_items.reloadData()
             })
             .disposed(by: dispose_bag)
-        
     }
     
     private func bindUser(user:ModelUser?)

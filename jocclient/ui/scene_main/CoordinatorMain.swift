@@ -39,12 +39,14 @@ class CoordinatorMain:BaseCoordinator
         navigation_controller.clearAndPush(vc: vc_wrapper)
         
         
-        vc_wrapper.tabBar.barTintColor = MyColors.gi.white
+        
         let tab_bar = vc_wrapper.tabBar
-        tab_bar.removeLine()
+//        tab_bar.removeLine()
         tab_bar.addShadowMin()
+        tab_bar.barTintColor = MyColors.gi.white
         
         vc_wrapper.preloadAllControllers()
+        vc_wrapper.selectedIndex = 1
     }
     
     func startProfileEdit()

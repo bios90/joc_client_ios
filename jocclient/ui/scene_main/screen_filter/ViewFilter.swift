@@ -105,8 +105,6 @@ class ViewFilter:BaseViewController
         let max = Int( slider.value[1])
         
         vm_filter.priceSliderChanged(min: min, max: max)
-        print("thumb \(slider.draggedThumbIndex) moved")
-        print("now thumbs are at \(slider.value)") // e.g., [1.0, 4.5, 5.0]
     }
     
     

@@ -5,7 +5,7 @@ import RxCocoa
 class CoordinatorCafeMenu:BaseCoordinator
 {
     static let ps_clicked_arrow_back:PublishSubject<Void> = PublishSubject.init()
-
+    
     let vm_cafe_page:VmCafePage
     let vm_categ_hot:VmCateg!
     let vm_categ_cold:VmCateg!
@@ -32,8 +32,9 @@ class CoordinatorCafeMenu:BaseCoordinator
     {
         vc_wrapper_cafe_menu.tabBar.barTintColor = MyColors.gi.white
         let tab_bar = vc_wrapper_cafe_menu.tabBar
-        tab_bar.removeLine()
+        //        tab_bar.removeLine()
         tab_bar.addShadowMin()
+        tab_bar.barTintColor = MyColors.gi.white
         
         navigation_controller.pushViewController(vc_wrapper_cafe_menu, animated: true)
         
@@ -89,7 +90,7 @@ class CoordinatorCafeMenu:BaseCoordinator
                     
                     self.toProductShow(product: item.product, basket_item: item)
             })
-        .disposed(by: dispose_bag)
+            .disposed(by: dispose_bag)
         
         vm_basket.ps_clicked_regiter
             .subscribe(onNext:
@@ -97,14 +98,14 @@ class CoordinatorCafeMenu:BaseCoordinator
                     BusMainEvents.gi.ps_scroll_to_tab.onNext(.profile)
                     self.vc_wrapper_cafe_menu.removeOrDismiss()
             })
-        .disposed(by: dispose_bag)
+            .disposed(by: dispose_bag)
         
         vm_basket.ps_clicked_order
             .subscribe(onNext:
                 {
                     self.toOrderDialog()
             })
-        .disposed(by: dispose_bag)
+            .disposed(by: dispose_bag)
     }
     
     private func setViewsForTabs(cafe:ModelCafe)
@@ -143,13 +144,14 @@ class CoordinatorCafeMenu:BaseCoordinator
             controllers.append(vc_snacks)
         }
         
-       
-
-        let vc_basket = ViewBasket()
-        vc_basket.vm_basket = vm_basket
-        vc_basket.tabBarItem = getBottomIcon(img: MyImage.ic_bag.getImage(), title: "")
-        
-        controllers.append(vc_basket)
+        if cafe.can_order == true
+        {
+            let vc_basket = ViewBasket()
+            vc_basket.vm_basket = vm_basket
+            vc_basket.tabBarItem = getBottomIcon(img: MyImage.ic_bag.getImage(), title: "")
+            
+            controllers.append(vc_basket)
+        }
         
         
         vc_wrapper_cafe_menu.viewControllers = controllers
@@ -167,12 +169,15 @@ extension CoordinatorCafeMenu
         view_product_settings.vm_product_settings = vm_product_settings
         view_product_settings.modalPresentationStyle = .pageSheet
         
+        let can_order = vm_cafe_page.br_cafe.value?.can_order == true
+        vm_product_settings.br_can_order.accept(can_order)
+        
         if let basket_item = basket_item
         {
             vm_product_settings.br_basket_item.accept(basket_item)
             vm_product_settings.br_is_edit_mode.accept(true)
         }
-
+        
         getTopViewController().present(view_product_settings, animated: true)
     }
     

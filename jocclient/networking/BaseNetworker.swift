@@ -142,7 +142,8 @@ class BaseNetworker
     
     func makeOrder(date:String, comment:String?,items:String,action_success:@escaping(Int)->Void,action_error:@escaping(Error)->Void)
     {
-        MyRequest.getReqOrderCreate(date: date, comment: comment, items: items)
+        guard let cafe_id = BasketManager.gi.br_cafe.value?.id else { return }
+        MyRequest.getReqOrderCreate(date: date,cafe_id: cafe_id, comment: comment, items: items)
             .toObservable()
             .addMyParser(type: RespOrderCreation.self)
             .addParsingFilter({ $0.order_data?.id != nil })
@@ -219,6 +220,40 @@ class BaseNetworker
                 { response in
                     
                     action_success(response.order!)
+            })
+            .disposed(by: base_vm.dispose_bag)
+    }
+    
+    func makeOrderReview(order_id:Int,cafe_id:Int,text:String?,rating:Int,action_success:@escaping()->Void)
+    {
+        MyRequest.getReqMakeOrderReview(order_id: order_id, cafe_id: cafe_id, text: text, rating: rating)
+            .toObservable()
+            .addMyParser(type: BaseResponse.self)
+            .addProgressDialog()
+            .addScreenDisabling()
+            .addMyErrorChecker()
+            .mainThreated()
+            .subscribeMy(
+                { response in
+                    
+                    action_success()
+            })
+            .disposed(by: base_vm.dispose_bag)
+    }
+    
+    func makeOrderCancel(order_id:Int,action_success:@escaping()->Void)
+    {
+        MyRequest.getReqCancelOrder(order_id: order_id)
+            .toObservable()
+            .addMyParser(type: BaseResponse.self)
+            .addProgressDialog()
+            .addScreenDisabling()
+            .addMyErrorChecker()
+            .mainThreated()
+            .subscribeMy(
+                { response in
+                    
+                    action_success()
             })
             .disposed(by: base_vm.dispose_bag)
     }

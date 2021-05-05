@@ -2,29 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Для нахождения ближайших кафе</string>
-
-    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Для нахождения ближайших кафе</string>
-
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Для нахождения ближайших кафе</string>
-    
-    <key>NSCameraUsageDescription</key>
-    <string>Для получения фото профиля</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Для получения фото профиля</string>
-    <key>UIAppFonts</key>
-    <array>
-        <string>fa_solid.ttf</string>
-        <string>fa_regular.ttf</string>
-        <string>fa_brands.otf</string>
-        <string>fa_light.ttf</string>
-        <string>exo_reg.ttf</string>
-        <string>exo_bold.ttf</string>
-        <string>exo_light.ttf</string>
-    </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -38,11 +15,31 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Для получения фото профиля</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Для нахождения ближайших кафе</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Для нахождения ближайших кафе</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Для нахождения ближайших кафе</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Для получения фото профиля</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>fa_solid.ttf</string>
+		<string>fa_regular.ttf</string>
+		<string>fa_brands.otf</string>
+		<string>fa_light.ttf</string>
+		<string>exo_reg.ttf</string>
+		<string>exo_bold.ttf</string>
+		<string>exo_light.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -52,8 +49,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

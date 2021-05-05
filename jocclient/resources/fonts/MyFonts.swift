@@ -72,4 +72,13 @@ class MyFonts
     let faw_solid_l = UIFont(name: FontName.fa_solid.rawValue, size: FontSize.l.rawValue)!
     let faw_solid_xl = UIFont(name: FontName.fa_solid.rawValue, size: FontSize.xl.rawValue)!
     let faw_solid_xxl = UIFont(name: FontName.fa_solid.rawValue, size: FontSize.xxl.rawValue)!
+    
+    let faw_brands_xxxs = UIFont(name: FontName.fa_brands.rawValue, size: FontSize.xxxs.rawValue)!
+    let faw_brands_xxs = UIFont(name: FontName.fa_brands.rawValue, size: FontSize.xxs.rawValue)!
+    let faw_brands_xs = UIFont(name: FontName.fa_brands.rawValue, size: FontSize.xs.rawValue)!
+    let faw_brands_s = UIFont(name: FontName.fa_brands.rawValue, size: FontSize.s.rawValue)!
+    let faw_brands_m = UIFont(name: FontName.fa_brands.rawValue, size: FontSize.m.rawValue)!
+    let faw_brands_l = UIFont(name: FontName.fa_brands.rawValue, size: FontSize.l.rawValue)!
+    let faw_brands_xl = UIFont(name: FontName.fa_brands.rawValue, size: FontSize.xl.rawValue)!
+    let faw_brands_xxl = UIFont(name: FontName.fa_brands.rawValue, size: FontSize.xxl.rawValue)!
 }

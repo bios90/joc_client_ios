@@ -6,7 +6,7 @@ class MyLocationManager:NSObject, CLLocationManagerDelegate
 {
     static let gi = MyLocationManager()
     let location_manager = CLLocationManager()
-    var is_getting_location = false
+    
     
     override init()
     {
@@ -20,15 +20,20 @@ class MyLocationManager:NSObject, CLLocationManagerDelegate
         
         if CLLocationManager.locationServicesEnabled()
         {
-            print("Will start gettting")
-            location_manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            location_manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+//            location_manager.desiredAccuracy = kCLLocationAccuracyBest
+            location_manager.distanceFilter = 50
             location_manager.startUpdatingLocation()
+        }
+        
+        if let last_location = LocalData.getUserLastLocation()
+        {
+            BusMainEvents.gi.br_current_location.accept(last_location)
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        print("Got location somemee")
         guard let location: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         BusMainEvents.gi.br_current_location.accept(location)
     }

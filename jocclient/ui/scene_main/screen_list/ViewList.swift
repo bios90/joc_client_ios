@@ -10,6 +10,7 @@ class ViewList:BaseViewController
     
     var vc_by_distance = ViewCafesListForTb()
     var vc_by_rating = ViewCafesListForTb()
+    var vc_by_middle_price = ViewCafesListForTb()
     
     override func viewDidLoad()
     {
@@ -26,6 +27,7 @@ class ViewList:BaseViewController
         super.viewWillAppear(animated)
         swipe_controller.navigationBar.removeBottomLine()
         swipe_controller.navigationBar.addShadowMin()
+        
         if(!is_swipe_buttons_setted)
         {
             resetSwipeControllerButtons()
@@ -36,11 +38,13 @@ class ViewList:BaseViewController
     {
         vc_by_distance.title = MyStrings.by_distance.localized()
         vc_by_rating.title = MyStrings.by_rating.localized()
+        vc_by_middle_price.title = MyStrings.by_price.localized()
         
         vc_by_distance.action_clicked_cafe = { self.vm_list.clickedCafe(cafe: $0) }
         vc_by_rating.action_clicked_cafe = { self.vm_list.clickedCafe(cafe: $0) }
+        vc_by_middle_price.action_clicked_cafe = { self.vm_list.clickedCafe(cafe: $0) }
         
-        swipe_controller = SwipeViewController(pages: [vc_by_distance, vc_by_rating])
+        swipe_controller = SwipeViewController(pages: [vc_by_distance, vc_by_rating, vc_by_middle_price])
         
         swipe_controller.offset = 0
         swipe_controller.leftBarButtonItem = nil
@@ -50,6 +54,7 @@ class ViewList:BaseViewController
         swipe_controller.offset = 0
         swipe_controller.equalSpaces = true
         swipe_controller.bottomOffset = 6
+        swipe_controller.navigationBarColor = MyColors.gi.white
         swipe_controller.selectionBarHeight = 0
         swipe_controller.selectionBarWidth =  getScreenWidth() / 2
         swipe_controller.selectionBarColor = MyColors.gi.orange
@@ -67,7 +72,7 @@ class ViewList:BaseViewController
         for i in 0..<swipe_controller.buttons.count
         {
             let btn = swipe_controller.buttons[i]
-            let width = getScreenWidth() / 2
+            let width = getScreenWidth() / 3
             let frame_now = btn.frame
             btn.frame = CGRect(x: (CGFloat(i) * width) - 8,y: frame_now.minY, width: width,height: frame_now.height)
             btn.myla()
@@ -81,6 +86,8 @@ class ViewList:BaseViewController
         vm_list.br_cafes.subscribe(onNext:
             {cafes in
                 
+                print("Herer got cafes count \(cafes.count)")
+                
                 let by_rating = cafes.sorted(by:
                 { cafe_1,cafe_2 in
                     
@@ -93,8 +100,16 @@ class ViewList:BaseViewController
                     return (cafe_1.distance ?? 0) > (cafe_2.distance ?? 0)
                 })
                 
+                let by_price = cafes.sorted(by:
+                { cafe_1,cafe_2 in
+                    
+                    //Todo later remake for real
+                    return (cafe_1.created ?? Date()) > (cafe_2.created ?? Date())
+                })
+                
                 self.vc_by_distance.setCafes(cafes: by_distance)
                 self.vc_by_rating.setCafes(cafes: by_rating)
+                self.vc_by_middle_price.setCafes(cafes: by_price)
         })
             .disposed(by: dispose_bag)
     }

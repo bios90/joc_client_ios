@@ -3,6 +3,10 @@ import IQKeyboardManagerSwift
 import GoogleMaps
 import GooglePlaces
 
+
+//ADdddd no reviews in cafe page
+//ADdddd back btn in cafe pageee
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
@@ -29,10 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     private func initGoogleMaps()
     {
-        GMSServices.provideAPIKey("AIzaSyAM2KVBocv1fj_Q5Rk0bbmJ4fl_u3ZEqp0")
-        GMSPlacesClient.provideAPIKey("AIzaSyAM2KVBocv1fj_Q5Rk0bbmJ4fl_u3ZEqp0")
+        //        GMSServices.provideAPIKey("AIzaSyAM2KVBocv1fj_Q5Rk0bbmJ4fl_u3ZEqp0")
+        GMSServices.provideAPIKey("AIzaSyBITlGQMj0lD51-t9G5LBz0se54ImSnOUc")
+        //        GMSPlacesClient.provideAPIKey("AIzaSyAM2KVBocv1fj_Q5Rk0bbmJ4fl_u3ZEqp0")
+        GMSPlacesClient.provideAPIKey("AIzaSyBITlGQMj0lD51-t9G5LBz0se54ImSnOUc")
     }
-
-
+    
+    
 }
 

@@ -3,6 +3,12 @@ import SimpleCheckbox
 
 class LaAuth:UIView
 {
+    let view_bg:UIView =
+    {
+        let view = UIView()
+        return view
+    }()
+    
     let view_dialog : UIView =
     {
         let view = UIView()
@@ -70,7 +76,7 @@ class LaAuth:UIView
         let btn = BtnRipple()
         btn.backgroundColor = MyColors.gi.transparent
         btn.setRippleColor(color: MyColors.gi.gray4.withAlphaComponent(0.4))
-//        btn.br_text.accept("ASDfsadf ")
+        //        btn.br_text.accept("ASDfsadf ")
         btn.br_text_color.accept(MyColors.gi.gray6)
         btn.titleLabel?.textAlignment = .left
         btn.contentEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
@@ -81,7 +87,8 @@ class LaAuth:UIView
     let btn_send:BtnRipple =
     {
         let btn = BtnRipple()
-        btn.addGradientView(grad_view: MyColors.gi.getOrangeGradient(horizontal: true))
+        //        btn.addGradientView(grad_view: MyColors.gi.getOrangeGradient(horizontal: true))
+        btn.backgroundColor = MyColors.gi.orange
         btn.layer.cornerRadius = 4
         btn.clipsToBounds = true
         btn.br_text.accept(MyStrings.send_code.localized())
@@ -101,6 +108,7 @@ class LaAuth:UIView
         self.addSubview(blurEffectView)
         
         
+        
         setupViews()
     }
     
@@ -111,6 +119,8 @@ class LaAuth:UIView
     
     private func setupViews()
     {
+        self.addSubview(view_bg)
+        
         self.addSubview(view_dialog)
         view_dialog.addSubview(lbl_title)
         view_dialog.addSubview(lbl_text)
@@ -119,6 +129,12 @@ class LaAuth:UIView
         view_dialog.addSubview(btn_send)
         view_dialog.addSubview(check_box)
         view_dialog.addSubview(btn_i_agree)
+        
+        view_bg.snp.makeConstraints(
+            { make in
+                
+                make.edges.equalToSuperview()
+        })
         
         view_dialog.snp.makeConstraints(
             { make in
@@ -138,7 +154,7 @@ class LaAuth:UIView
         
         lbl_text.snp.makeConstraints(
             { make in
-               
+                
                 make.top.equalTo(lbl_title.snp.bottom).offset(8)
                 make.left.equalToSuperview().offset(12)
                 make.right.equalToSuperview().offset(-12)
@@ -146,7 +162,7 @@ class LaAuth:UIView
         
         lbl_status_title.snp.makeConstraints(
             { make in
-               
+                
                 make.top.equalTo(lbl_text.snp.bottom).offset(8)
                 make.left.equalToSuperview().offset(12)
                 make.right.equalToSuperview().offset(-12)
@@ -154,7 +170,7 @@ class LaAuth:UIView
         
         tf.snp.makeConstraints(
             { make in
-               
+                
                 make.top.equalTo(lbl_status_title.snp.bottom).offset(8)
                 make.left.equalToSuperview().offset(12)
                 make.right.equalToSuperview().offset(-12)
@@ -171,7 +187,7 @@ class LaAuth:UIView
         
         btn_send.snp.makeConstraints(
             { make in
-               
+                
                 make.top.equalTo(check_box.snp.bottom).offset(12)
                 make.left.equalToSuperview().offset(12)
                 make.right.equalToSuperview().offset(-12)

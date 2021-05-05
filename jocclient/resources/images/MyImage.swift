@@ -19,6 +19,12 @@ enum MyImage:String
     case ic_cup_to_go
     case ic_cookies
     case ic_arrow_left
+    case img_face_mask
+    case img_intro1
+    case img_intro2
+    case img_intro3
+    case img_intro4
+    case img_intro5
     
     func getImage() -> UIImage
     {

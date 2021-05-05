@@ -56,6 +56,12 @@ class BasketManager
         br_cafe.accept(cafe)
     }
     
+    func clearBasket()
+    {
+        br_cafe.accept(nil)
+        setItems(items: [])
+    }
+    
     func getSum()->Double
     {
         var sum = 0.0

@@ -118,6 +118,7 @@ class CellBasketItem:UITableViewCell
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         layout_subviews_my()
     }
     
@@ -242,6 +243,8 @@ class CellBasketItem:UITableViewCell
                 make.width.equalToSuperview().dividedBy(3)
                 make.right.equalToSuperview()
         })
+        
+        root_btn.disableChildClicks()
     }
     
     func bindItem(item:ModelBasketItem)

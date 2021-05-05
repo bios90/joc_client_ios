@@ -30,12 +30,14 @@ extension VmOrderDialog
     func clickedMakeOrder()
     {
         let date = br_date.value
-        let comment = br_comment.value 
+        let comment = br_comment.value
+        
         PaymentManager.gi.createOrder(base_vm: self, date: date, comment: comment, action_success:
             { order_id in
                 
+                BasketManager.gi.clearBasket()
                 BusMainEvents.gi.ps_order_created.onNext(order_id)
-                BusMainEvents.gi.ps_finish_vm_of_type.onNext([VmOrderDialog.self, VmWrapperCafeMenu.self])
+                self.ps_dissmiss_vc.onNext(true)
         })
     }
 }

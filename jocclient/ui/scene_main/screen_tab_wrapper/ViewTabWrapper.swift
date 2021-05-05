@@ -16,7 +16,6 @@ class ViewTabWrapper:BaseTabBarController
         btn.clipsToBounds = true
         btn.backgroundColor = MyColors.gi.orange
         btn.contentEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
-        btn.alpha = 0
         return btn
     }()
     

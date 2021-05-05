@@ -24,14 +24,20 @@ class FactoryProfile
         btn.br_text_color.accept(MyColors.gi.white)
         btn.setRippleColor(color: MyColors.gi.white.withAlphaComponent(0.4))
         btn.contentEdgeInsets = UIEdgeInsets(top: 0,left: 0,bottom: 0,right: 0)
+        btn.layer.zPosition = 15
         return btn
     }()
     
-    let img_info:UIImageView =
+    let btn_info:BtnRipple =
     {
-        let img = UIImageView()
-        img.image = MyImage.img_info_circle.getImage().setColorMy(MyColors.gi.white)
-        return img
+        let btn = BtnRipple()
+        btn.br_text.accept("")
+        btn.setRippleColor(color: MyColors.gi.white.withAlphaComponent(0.4))
+        
+        let img = MyImage.img_info_circle.getImage().setColorMy(MyColors.gi.white)
+        btn.addImage(image: img, size: 24)
+        btn.layer.zPosition = 15
+        return btn
     }()
     
     let img_avatar:ImgInRoundShadow =
@@ -66,7 +72,7 @@ class FactoryProfile
         lbl.textAlignment = .center
         lbl.font = MyFonts.gi.reg_s
         lbl.textColor = MyColors.gi.white
-        lbl.text = "Cuppps"
+        lbl.text = MyStrings.cofe.localized()
         return lbl
     }()
     
@@ -76,7 +82,7 @@ class FactoryProfile
         lbl.font = MyFonts.gi.reg_s
         lbl.textAlignment = .center
         lbl.textColor = MyColors.gi.white
-        lbl.text = "Ordarsss"
+        lbl.text = MyStrings.orders.localized()
         return lbl
     }()
     
@@ -86,7 +92,7 @@ class FactoryProfile
         lbl.font = MyFonts.gi.reg_s
         lbl.textAlignment = .center
         lbl.textColor = MyColors.gi.white
-        lbl.text = "Reviuuws"
+        lbl.text = MyStrings.reviews.localized()
         return lbl
     }()
     
@@ -97,7 +103,7 @@ class FactoryProfile
         lbl.textAlignment = .center
         lbl.font = MyFonts.gi.bold_l
         lbl.textColor = MyColors.gi.white
-        lbl.text = "12"
+        lbl.text = "-"
         return lbl
     }()
     
@@ -107,7 +113,7 @@ class FactoryProfile
         lbl.font = MyFonts.gi.bold_l
         lbl.textAlignment = .center
         lbl.textColor = MyColors.gi.white
-        lbl.text = "34"
+        lbl.text = "-"
         return lbl
     }()
     
@@ -117,13 +123,14 @@ class FactoryProfile
         lbl.font = MyFonts.gi.bold_l
         lbl.textAlignment = .center
         lbl.textColor = MyColors.gi.white
-        lbl.text = "45"
+        lbl.text = "-"
         return lbl
     }()
     
     var view_auth :LaAuth =
     {
         let view = LaAuth()
+        view.layer.zPosition = 30
         return view
     }()
     
@@ -137,16 +144,18 @@ class FactoryProfile
         tb.estimatedRowHeight = 1000
         tb.separatorInset = UIEdgeInsets.zero
         tb.separatorStyle = UITableViewCell.SeparatorStyle.none
-        tb.bounces = false
+        
         tb.backgroundColor = .white
         tb.contentInset = UIEdgeInsets(top: 22, left: 0, bottom: 22, right: 0)
+        
         return tb
     }()
     
     let refresh_control: UIRefreshControl =
     {
         let rc = ViewsHelper.getDefaultRefreshControl()
-        rc.attributedTitle = NSAttributedString(string: "")
+        rc.attributedTitle = NSAttributedString(string: MyStrings.refreshing.localized())
+        rc.bounds = CGRect.init(x: 0, y: 0, width: 100, height: 100)
         return rc
     }()
     
@@ -161,8 +170,8 @@ class FactoryProfile
         self.vc.view.backgroundColor = .white
         
         self.vc.view.addSubview(img_top)
-        self.img_top.addSubview(btn_edit)
-        self.img_top.addSubview(img_info)
+        self.vc.view.addSubview(btn_edit)
+        self.vc.view.addSubview(btn_info)
         self.img_top.addSubview(img_avatar)
         self.img_top.addSubview(lbl_user_name)
         self.img_top.addSubview(lbl_phone)
@@ -172,10 +181,10 @@ class FactoryProfile
         self.img_top.addSubview(lbl_cups_count)
         self.img_top.addSubview(lbl_orders_count)
         self.img_top.addSubview(lbl_reviews_count)
-        self.vc.view.addSubview(view_auth)
         self.vc.view.addSubview(tb_orders_items)
         tb_orders_items.refreshControl = refresh_control
         tb_orders_items.addSubview(refresh_control)
+        self.vc.view.addSubview(view_auth)
         
         img_top.snp.makeConstraints(
             { make in
@@ -192,7 +201,7 @@ class FactoryProfile
                 make.height.width.equalTo(24)
         })
         
-        img_info.snp.makeConstraints(
+        btn_info.snp.makeConstraints(
             { make in
                 
                 make.right.equalTo(btn_edit.snp.left).offset(-8)

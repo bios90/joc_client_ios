@@ -23,6 +23,14 @@ class ViewCafePage:BaseViewController
         factory_cafe_page.img_arrow_back.addAction {
             self.vm_cafe_page.clickedArrowBack()
         }
+        
+        factory_cafe_page.btn_name.addAction {
+            self.vm_cafe_page.clickedArrowBack()
+        }
+        
+        factory_cafe_page.btn_route.addAction {
+            self.vm_cafe_page.clickedRoute()
+        }
     }
     
     private func setEvents()
@@ -37,6 +45,15 @@ class ViewCafePage:BaseViewController
                     }
             })
             .disposed(by: dispose_bag)
+        
+        vm_cafe_page.ps_route_text
+            .subscribe(onNext:
+                { distance_text in
+                   
+                    print("Distance text is \(distance_text)")
+                    self.factory_cafe_page.lbl_distance.text = distance_text
+            })
+            .disposed(by: dispose_bag)
     }
     
     private func bindCafe(cafe:ModelCafe)
@@ -46,12 +63,12 @@ class ViewCafePage:BaseViewController
             factory_cafe_page.view_cafe_logo.img.loadImageMy(url_str: url)
         }
         
-        factory_cafe_page.lbl_name.text = cafe.name
+        factory_cafe_page.btn_name.br_text.accept(cafe.name ?? "")
         factory_cafe_page.rating.rating = cafe.rating ?? 0.0
         factory_cafe_page.tf_description.text = cafe.description
         factory_cafe_page.lbl_adress.text = cafe.address
         factory_cafe_page.lbl_time.text = cafe.working_hours_str
-        factory_cafe_page.lbl_distance.text = cafe.getDistanseText()
+//        factory_cafe_page.lbl_distance.text = cafe.getDistanseText()
         
         if factory_cafe_page.tf_description.getNumberOfLines() < 2
         {
@@ -60,6 +77,7 @@ class ViewCafePage:BaseViewController
         }
         
         bind_images(images: cafe.images ?? [])
+        bindSocials(cafe: cafe)
         
         factory_cafe_page.view_top.myla()
         let grad_view = MyColors.gi.getOrangeGradient(horizontal: true)
@@ -68,6 +86,11 @@ class ViewCafePage:BaseViewController
         
         self.reviews = cafe.reviews ?? []
         self.factory_cafe_page.tb_reviews.reloadData()
+        
+        if(reviews.count > 0)
+        {
+            self.factory_cafe_page.lbl_no_reviews.isHidden = true
+        }
     }
     
     func bind_images(images:[BaseImage])
@@ -113,6 +136,22 @@ class ViewCafePage:BaseViewController
                 
                 updater.height.equalTo(height)
         })
+    }
+    
+    func bindSocials(cafe:ModelCafe)
+    {
+        for social in cafe.getSocials()
+        {
+            if let social_url = social.value, social_url.isEmpty == false
+            {
+                let btn = BtnRipple.getSocialBtn(str: social.key, action:
+                {
+                    openUrl(url_str: social_url)
+                })
+                
+                self.factory_cafe_page.stack_socials.addArrangedSubview(btn)
+            }
+        }
     }
 }
 

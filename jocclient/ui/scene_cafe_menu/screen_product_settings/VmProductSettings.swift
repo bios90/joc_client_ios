@@ -7,6 +7,7 @@ class VmProductSettings:BaseVm
     let br_product:BehaviorRelay<ModelProduct>
     let br_basket_item:BehaviorRelay<ModelBasketItem>
     let br_is_edit_mode:BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
+    let br_can_order:BehaviorRelay<Bool> = BehaviorRelay.init(value: false)
     
     init(product:ModelProduct)
     {

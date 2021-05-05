@@ -105,7 +105,7 @@ class FactoryProfileEdit
         btn.addGradientView(grad_view: MyColors.gi.getOrangeGradient(horizontal: true))
         btn.layer.cornerRadius = 4
         btn.clipsToBounds = true
-        btn.br_text.accept("asdsFSADF")
+        btn.br_text.accept(MyStrings.save.localized())
         btn.br_text_color.accept(MyColors.gi.white)
         return btn
     }()

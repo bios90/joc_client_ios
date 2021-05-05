@@ -111,21 +111,17 @@ extension Observable where Element == AFDataResponse<Data?>
                     throw err
                 }
                 
-                print("***** here1111 *****")
-                
                 guard let data = response.data else
                 {
                     throw RequestError.ErrUnknown
                 }
                 
-                print("***** here2222 *****")
                 let str = String(decoding: data, as: UTF8.self)
                 print(str)
                 
                 
                 guard let base_response = try? JSONDecoder().decode(BaseResponse.self, from: data) else { throw RequestError.ErrJsonDecode }
                 
-                print("***** here2222 *****")
                 if let error = base_response.getError()
                 {
                     throw error

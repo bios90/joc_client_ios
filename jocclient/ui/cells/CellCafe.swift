@@ -79,7 +79,7 @@ class CellCafe:UITableViewCell
     {
         let lbl = UILabel()
         lbl.font = MyFonts.gi.faw_light_s
-        lbl.text = FawString.location_arraw.rawValue
+        lbl.text = FawString.location_arrow.rawValue
         lbl.textColor = MyColors.gi.gray5
         return lbl
     }()
@@ -96,6 +96,7 @@ class CellCafe:UITableViewCell
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         layout_subviews_my()
     }
     

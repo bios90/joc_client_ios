@@ -22,7 +22,7 @@ class CellProduct:UITableViewCell
         btn.layer.cornerRadius = 4
         btn.clipsToBounds = true
         btn.backgroundColor = MyColors.gi.white
-        btn.layer.backgroundColor = MyColors.gi.white.cgColor
+        btn.setRippleColor(color: MyColors.gi.gray1)
         
         return btn
     }()
@@ -76,6 +76,7 @@ class CellProduct:UITableViewCell
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         layout_subviews_my()
     }
     
@@ -154,6 +155,8 @@ class CellProduct:UITableViewCell
                 make.right.equalToSuperview().offset(-6)
                 make.centerY.equalToSuperview()
         })
+        
+        root_btn.disableChildClicks()
     }
     
     func bindProduct(product:ModelProduct)
@@ -165,7 +168,7 @@ class CellProduct:UITableViewCell
         
         lbl_name.text = product.name
         lbl_description.text = product.description
-        let price_text = "От\n\(product.getMinPrice().formatWithPattern(format: .formatForPrice))"
+        let price_text = "\(product.getMinPrice().formatWithPattern(format: .formatForPrice)) р."
         lbl_price.text = price_text
         
 //        view_right.myla()

@@ -4,7 +4,7 @@ class Constants
 {
     struct Urls
     {
-        static let test_mode = true
+        static let test_mode = false
         static let URL_BASE:String =
         {
             if(test_mode)
@@ -28,13 +28,30 @@ class Constants
         static let URL_ORDER_CANCEL = "api/\(Constants.Urls.API_VERSION)/order/status-update"
         static let URL_ORDER_GET_INFO = "api/\(Constants.Urls.API_VERSION)/order/info"
         static let URL_ORDER_GET_USER_ORDERS = "api/\(Constants.Urls.API_VERSION)/order/list"
-        static let URL_ORDER_MAKE_REVIEW = "api/\(Constants.Urls.API_VERSION)/client/register"
+        static let URL_ORDER_MAKE_REVIEW = "api/\(Constants.Urls.API_VERSION)/cafe/review"
     }
     
     struct Payments
     {
-        static let SHOP_ID = "724027"
-        static let API_KEY = "test_NzI0MDI3O0fCxNm7K8L46XswOyF6e661TFvPCmMGclk"
+        static let API_KEY:String =
+        {
+            if(Constants.Urls.test_mode)
+            {
+                return "test_NzI0MDI3O0fCxNm7K8L46XswOyF6e661TFvPCmMGclk"
+            }
+            
+            return "live_NzIxMjY4I2UiYQSiF5Q1IN5dNntIb4ORicC8MElopsU"
+        }()
+        
+        static let SHOP_ID:String =
+        {
+            if(Constants.Urls.test_mode)
+            {
+                return "724027"
+            }
+            
+            return "721268"
+        }()
     }
 }
 

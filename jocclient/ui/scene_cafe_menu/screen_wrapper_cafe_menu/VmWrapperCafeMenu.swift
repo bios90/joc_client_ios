@@ -17,6 +17,17 @@ class VmWrapperCafeMenu:BaseVm
     
     private func setEvents()
     {
+        BusMainEvents.gi.ps_order_created
+            .subscribe(onNext:
+                { _ in
+                     
+                    runActionWithDelay(milliseconds: 1000, action:
+                        {
+                            self.ps_dissmiss_vc.onNext(true)
+                    })
+            })
+            .disposed(by: dispose_bag)
+        
         br_cafe_id
             .subscribe(onNext:
                 { cafe_id in

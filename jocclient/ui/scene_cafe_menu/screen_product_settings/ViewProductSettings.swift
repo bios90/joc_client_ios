@@ -79,6 +79,11 @@ class ViewProductSettings:BaseViewController
         bindBubbles(product: product)
         recountScreenHeight()
         
+        if vm_product_settings.br_can_order.value == false
+        {
+            factory_product_settings.btn_add.removeFromSuperview()
+        }
+        
         runActionWithDelay(milliseconds: 100, action:
             {
                 self.factory_product_settings.view_container.makeRoundCorners(corners: [.topLeft,.topRight], radius: 12.0)
@@ -114,7 +119,8 @@ class ViewProductSettings:BaseViewController
             top_anchor = bubbles_weight!.snp.bottom
         }
         
-        if product.type == TypeProduct.Hot || product.type == TypeProduct.Cold
+        let can_order = vm_product_settings.br_can_order.value
+        if (product.type == TypeProduct.Hot || product.type == TypeProduct.Cold) && can_order
         {
             bubbles_shugar = ProductBubbles()
             bubbles_shugar?.lbl_title.text = MyStrings.sugar.localized()
@@ -266,6 +272,7 @@ class ViewProductSettings:BaseViewController
         {
             let selected:Int? = bubbles_milks?.bubbles_view.getSelected()
             
+            
             if let milk = basket_item.milk
             {
                 let pos = milks.firstIndex(where:{ $0.value == milk.value })
@@ -274,7 +281,7 @@ class ViewProductSettings:BaseViewController
                 {
                     bubbles_milks?.bubbles_view.setSelected(selected: [pos!])
                 }
-                else
+                else if pos == nil
                 {
                     bubbles_milks?.bubbles_view.setSelected(selected: [])
                 }

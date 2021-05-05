@@ -18,7 +18,7 @@ class VmBasket:BaseVm
     let ps_clicked_order:PublishSubject<Void> = PublishSubject.init()
     let ps_clicked_quick_order:PublishSubject<Void> = PublishSubject.init()
     
-    let br_page_status:BehaviorRelay<TypeBasketPageStatus> = BehaviorRelay.init(value: .can_buy)
+    let br_page_status:BehaviorRelay<TypeBasketPageStatus> = BehaviorRelay.init(value: .cafe_not_active)
     
     init(vm_wrapper_cafe_menu:VmWrapperCafeMenu)
     {
@@ -51,9 +51,6 @@ class VmBasket:BaseVm
     {
         guard let cafe = vm_wrapper.br_initial_cafe_loaded.value else { return }
         
-        self.br_page_status.accept(.can_buy)
-        return
-        
         if cafe.can_order != true
         {
             self.br_page_status.accept(.cafe_not_active)
@@ -66,7 +63,6 @@ class VmBasket:BaseVm
         {
             self.br_page_status.accept(.can_buy)
         }
-        
     }
 }
 
@@ -110,8 +106,9 @@ extension VmBasket
         PaymentManager.gi.createOrder(base_vm: self, date: date, comment: nil, action_success:
             { order_id in
                 
+                
+                BasketManager.gi.clearBasket()
                 BusMainEvents.gi.ps_order_created.onNext(order_id)
-                BusMainEvents.gi.ps_finish_vm_of_type.onNext([VmOrderDialog.self, VmWrapperCafeMenu.self])
         })
     }
 }

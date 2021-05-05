@@ -75,6 +75,7 @@ class FactoryOrderDialog
     {
         let picker = UIDatePicker()
         picker.datePickerMode = .time
+        picker.setValue(MyColors.gi.gray6, forKeyPath: "textColor")
         return picker
     }()
     
@@ -163,7 +164,7 @@ class FactoryOrderDialog
         view_container.snp.makeConstraints(
             { make in
                 
-                make.height.equalTo(654)
+                make.height.equalTo(612)
                 make.bottom.left.right.equalToSuperview()
         })
         

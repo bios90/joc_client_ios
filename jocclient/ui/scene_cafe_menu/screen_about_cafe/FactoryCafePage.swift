@@ -7,6 +7,9 @@ class FactoryCafePage
     static let logo_size = 72
     static let image_top_margin = 8
     static let square_img_size = 98
+    static let route_btn_height = 26
+    static let social_icon_size = 22
+
     
     let scroll :UIScrollView =
     {
@@ -23,7 +26,9 @@ class FactoryCafePage
     
     let img_arrow_back:BtnRipple =
     {
-        return ViewsHelper.getArrowBack()
+        let btn = ViewsHelper.getArrowBack()
+        
+        return btn
     }()
     
     let view_cafe_logo:ImgInRoundShadow =
@@ -33,14 +38,16 @@ class FactoryCafePage
         return view
     }()
     
-    let lbl_name:UILabel =
+    let btn_name:BtnRipple =
     {
-        let lbl = UILabel()
-        lbl.textColor = MyColors.gi.white
-        lbl.textAlignment = .left
-        lbl.font = MyFonts.gi.bold_m
-        lbl.text = "Name test"
-        return lbl
+        let btn = BtnRipple()
+        btn.br_font.accept(MyFonts.gi.bold_m)
+        btn.br_text_color.accept(MyColors.gi.white)
+        btn.backgroundColor = MyColors.gi.transparent
+        let ripple_color = MyColors.gi.white.withAlphaComponent(0.4)
+        btn.setRippleColor(color: ripple_color)
+        btn.contentHorizontalAlignment = .left
+        return btn
     }()
     
     let rating:CosmosView =
@@ -104,8 +111,29 @@ class FactoryCafePage
     {
         let lbl = UILabel()
         lbl.font = MyFonts.gi.faw_light_s
-        lbl.text = FawString.location_arraw.rawValue
+        lbl.text = FawString.location_arrow.rawValue
         lbl.textColor = MyColors.gi.white
+        return lbl
+    }()
+    
+    let btn_route:BtnRipple =
+    {
+        let btn = BtnRipple()
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = MyColors.gi.white.cgColor
+        btn.layer.cornerRadius = CGFloat(FactoryCafePage.route_btn_height / 2)
+        btn.setRippleCornerRadius(radius: CGFloat(FactoryCafePage.route_btn_height / 2))
+        let ripple_color = MyColors.gi.white.withAlphaComponent(0.3)
+        btn.setRippleColor(color: ripple_color)
+        return btn
+    }()
+    
+    let lbl_walk:UILabel =
+    {
+        let lbl = UILabel()
+        lbl.font = MyFonts.gi.faw_solid_xs
+        lbl.textColor = MyColors.gi.white
+        lbl.text = FawString.location_arrow.rawValue
         return lbl
     }()
     
@@ -113,8 +141,26 @@ class FactoryCafePage
     {
         let lbl = UILabel()
         lbl.font = MyFonts.gi.reg_xs
-        lbl.text = "212m"
         lbl.textColor = MyColors.gi.white
+        return lbl
+    }()
+    
+    let stack_socials:UIStackView =
+    {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 6
+        return stack
+    }()
+    
+    let lbl_no_reviews:UILabel =
+    {
+        let lbl = UILabel()
+        lbl.font = MyFonts.gi.reg_m
+        lbl.text = MyStrings.no_reviews_yet.localized()
+        lbl.textColor = MyColors.gi.gray4
+        lbl.textAlignment = .center
+        lbl.numberOfLines = 0
         return lbl
     }()
     
@@ -130,6 +176,7 @@ class FactoryCafePage
         tb.separatorStyle = UITableViewCell.SeparatorStyle.none
         tb.bounces = false
         tb.backgroundColor = .white
+        tb.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 22, right: 0)
         return tb
     }()
     
@@ -145,20 +192,24 @@ class FactoryCafePage
         self.vc.view.backgroundColor = MyColors.gi.green
         
         self.vc.view.addSubview(scroll)
-//        scroll.addSubview(view_top)
         self.vc.view.addSubview(view_top)
         view_top.addSubview(view_cafe_logo)
-        view_top.addSubview(img_arrow_back)
-        view_top.addSubview(lbl_name)
+        view_top.addSubview(btn_name)
         view_top.addSubview(rating)
         view_top.addSubview(tf_description)
+        view_top.addSubview(img_arrow_back)
         view_top.addSubview(scroll_image)
         view_top.addSubview(lbl_adress)
         view_top.addSubview(lbl_clock)
         view_top.addSubview(lbl_time)
-        view_top.addSubview(lbl_distance)
-        view_top.addSubview(lbl_location_arrow)
+        view_top.addSubview(stack_socials)
+        
+        view_top.addSubview(btn_route)
+        btn_route.addSubview(lbl_location_arrow)
+        btn_route.addSubview(lbl_distance)
+        
         self.vc.view.addSubview(tb_reviews)
+        self.vc.view.addSubview(lbl_no_reviews)
         
         scroll.snp.makeConstraints(
             { make in
@@ -171,7 +222,7 @@ class FactoryCafePage
                 
                 make.centerX.width.equalToSuperview()
                 make.top.equalToSuperview().offset(-getStatusBarHeight())
-//                make.bottom.equalTo(lbl_location_arrow.snp.bottom).offset(36)
+                //                make.bottom.equalTo(lbl_location_arrow.snp.bottom).offset(36)
         })
         
         view_top.fitHeightToLastChild(offset: 12)
@@ -189,13 +240,15 @@ class FactoryCafePage
                 
                 make.width.height.equalTo(28)
                 make.left.equalToSuperview().offset(10)
-                make.centerY.equalTo(lbl_name)
+                
+                make.centerY.equalTo(btn_name)
         })
         
-        lbl_name.snp.makeConstraints(
+        btn_name.snp.makeConstraints(
             { make in
                 
-                make.left.equalTo(img_arrow_back.snp.right).offset(8)
+                make.left.equalTo(img_arrow_back.snp.right)
+                make.right.equalTo(view_cafe_logo.snp.left).offset(-10)
                 make.top.equalToSuperview().offset(12+(getStatusBarHeight()*2))
         })
         
@@ -204,7 +257,7 @@ class FactoryCafePage
                 
                 make.left.equalToSuperview().offset(12)
                 make.right.equalTo(view_cafe_logo.snp.left).offset(-12)
-                make.top.equalTo(lbl_name.snp.bottom).offset(4)
+                make.top.equalTo(btn_name.snp.bottom).offset(4)
         })
         
         tf_description.snp.makeConstraints(
@@ -235,7 +288,7 @@ class FactoryCafePage
         lbl_clock.snp.makeConstraints(
             { make in
                 
-                make.top.equalTo(lbl_adress.snp.bottom).offset(12)
+                make.top.equalTo(lbl_adress.snp.bottom).offset(18)
                 make.left.equalToSuperview().offset(12)
         })
         
@@ -249,17 +302,35 @@ class FactoryCafePage
         lbl_location_arrow.snp.makeConstraints(
             { make in
                 
-                make.right.equalToSuperview().offset(-12)
-                make.centerY.equalTo(lbl_clock)
+                make.left.equalToSuperview().offset(10)
+                make.centerY.equalToSuperview()
         })
         
         lbl_distance.snp.makeConstraints(
             { make in
                 
-                make.right.equalTo(lbl_location_arrow.snp.left).offset(-6)
-                make.centerY.equalTo(lbl_location_arrow)
+                make.right.equalToSuperview().offset(-10)
+                make.left.equalTo(lbl_location_arrow.snp.right).offset(4)
+                make.centerY.equalToSuperview()
         })
         
+        btn_route.snp.makeConstraints(
+            { make in
+                
+                make.right.equalToSuperview().offset(-12)
+                make.centerY.equalTo(lbl_clock)
+                make.height.equalTo(FactoryCafePage.route_btn_height)
+        })
+        
+        stack_socials.snp.makeConstraints(
+            { make in
+                
+                make.height.equalTo(FactoryCafePage.social_icon_size)
+                make.centerX.equalToSuperview()
+                make.centerY.equalTo(lbl_clock)
+        })
+        
+
         resetLabelImageCut()
         
         tb_reviews.snp.makeConstraints(
@@ -267,6 +338,14 @@ class FactoryCafePage
                 
                 make.top.equalTo(view_top.snp.bottom)
                 make.left.right.bottom.equalToSuperview()
+        })
+        
+        lbl_no_reviews.snp.makeConstraints(
+            { make in
+                
+                make.top.equalTo(tb_reviews).offset(16)
+                make.left.equalToSuperview().offset(16)
+                make.right.equalToSuperview().offset(-16)
         })
     }
     

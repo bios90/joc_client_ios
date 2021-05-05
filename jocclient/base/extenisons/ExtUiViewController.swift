@@ -63,3 +63,13 @@ extension UIViewController
         present(controller, animated: true, completion: nil)
     }
 }
+
+extension UICollectionView
+{
+    func getFirstVisiblePos()->Int?
+    {
+        guard self.indexPathsForVisibleItems.count > 0 else { return nil }
+        let pos = self.indexPathsForVisibleItems[0].row
+        return pos
+    }
+}

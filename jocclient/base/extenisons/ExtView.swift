@@ -2,6 +2,15 @@ import UIKit
 
 extension UIView
 {
+    func disableChildClicks()
+    {
+        self.subviews.forEach(
+            { view in
+                
+                view.isUserInteractionEnabled = false
+        })
+    }
+    
     func myla()
     {
         self.setNeedsLayout()

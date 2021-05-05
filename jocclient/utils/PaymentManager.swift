@@ -75,8 +75,8 @@ class PaymentManager
         }
         
         //Todo later change for real
-//        let amount = Amount(value: Decimal(sum), currency: .rub)
-        let amount = Amount(value: 500.0, currency: .rub)
+        let amount = Amount(value: Decimal(sum), currency: .rub)
+//        let amount = Amount(value: 50.0, currency: .rub)
         let title = MyStrings.payment.localized()
         let message = MyStrings.order_in_app_joc.localized()
         

@@ -1,12 +1,15 @@
 import UIKit
 import SwiftyAvatar
 import Cosmos
+import CoreLocation
 
 class LaCafePopup:UIView
 {
     static let circle_size = 96
+    static let route_btn_height = 26
     let cafe:ModelCafe
     let action_clicked:(ModelCafe)->Void
+    let action_clicked_route:(RouteInfoMy)->Void
     
     let view_for_avatar:UIView =
     {
@@ -32,7 +35,6 @@ class LaCafePopup:UIView
     {
         let lbl = UILabel()
         lbl.textColor = MyColors.gi.gray6
-        lbl.text = "Nammemememememe"
         lbl.textAlignment = .center
         lbl.font = MyFonts.gi.reg_l
         return lbl
@@ -44,7 +46,7 @@ class LaCafePopup:UIView
         lbl.textColor = MyColors.gi.gray4
         lbl.font = MyFonts.gi.reg_m
         lbl.textAlignment = .center
-        lbl.text = "safsfnaskljfnkasnf"
+        lbl.numberOfLines = 0
         return lbl
     }()
     
@@ -52,7 +54,7 @@ class LaCafePopup:UIView
     {
         let lbl = UILabel()
         lbl.font = MyFonts.gi.faw_light_s
-        lbl.text = FawString.location_arraw.rawValue
+        lbl.text = FawString.location_arrow.rawValue
         lbl.textColor = MyColors.gi.gray4
         return lbl
     }()
@@ -61,7 +63,7 @@ class LaCafePopup:UIView
     {
         let lbl = UILabel()
         lbl.font = MyFonts.gi.bold_s
-        lbl.textColor = MyColors.gi.gray4
+        lbl.textColor = MyColors.gi.gray5
         return lbl
     }()
     
@@ -71,13 +73,37 @@ class LaCafePopup:UIView
         return cosmos
     }()
     
+    let btn_route:BtnRipple =
+    {
+        let btn = BtnRipple()
+        btn.layer.cornerRadius = CGFloat(LaCafePopup.route_btn_height / 2)
+        btn.clipsToBounds = true
+        return btn
+    }()
+    
+    let lbl_walk:UILabel =
+    {
+        let lbl = UILabel()
+        lbl.font = MyFonts.gi.faw_solid_xs
+        lbl.textColor = MyColors.gi.white
+        lbl.text = FawString.walk.rawValue
+        return lbl
+    }()
+    
+    let lbl_walk_time:UILabel =
+    {
+        let lbl = UILabel()
+        lbl.font = MyFonts.gi.bold_xs
+        lbl.textColor = MyColors.gi.white
+        return lbl
+    }()
+    
     let lbl_description:UILabel =
     {
         let lbl = UILabel()
         lbl.font = MyFonts.gi.reg_s
-        lbl.text = "afgjn dskfjlgk sbdgkhdbsfg hkasdj fkldfsbg ks bdfgksdfhbg lbhw lkbhkhbsdf bhdjfbg sdjkfhblwhb lkbhlkbsfdlhb sfjhbg"
         lbl.textColor = MyColors.gi.gray4
-        lbl.numberOfLines = 0
+        lbl.numberOfLines = 12
         return lbl
     }()
     
@@ -102,18 +128,19 @@ class LaCafePopup:UIView
     let btn_to_cafe:BtnRipple =
     {
         let btn = BtnRipple()
-        btn.addGradientView(grad_view: MyColors.gi.getOrangeGradient(horizontal: true))
         btn.layer.cornerRadius = 4
         btn.clipsToBounds = true
-        btn.br_text.accept("To cafeeee")
+        btn.br_text.accept(MyStrings.visit.localized())
         btn.br_text_color.accept(MyColors.gi.white)
+        btn.addGradientView(grad_view: MyColors.gi.getOrangeGradient(horizontal: true))
         return btn
     }()
     
-    init(cafe:ModelCafe,action_clicked:@escaping (ModelCafe)->Void)
+    init(cafe:ModelCafe,action_clicked:@escaping (ModelCafe)->Void,action_clicked_route:@escaping (RouteInfoMy)->Void)
     {
         self.cafe = cafe
         self.action_clicked = action_clicked
+        self.action_clicked_route = action_clicked_route
         super.init(frame: .zero)
         setupViews()
         bindCafe()
@@ -128,7 +155,7 @@ class LaCafePopup:UIView
     {
         if let url = cafe.logo?.url_m
         {
-             img_avatar.loadImageMy(url_str: url)
+            img_avatar.loadImageMy(url_str: url)
         }
         
         lbl_name.text = cafe.name
@@ -137,7 +164,7 @@ class LaCafePopup:UIView
         lbl_description.text = cafe.description
         lbl_time.text = cafe.working_hours_str
         
-        lbl_distance.text = cafe.getDistanseText()
+        lbl_walk_time.text = cafe.getDistanseText()
         
         btn_to_cafe.addAction {
             self.action_clicked(self.cafe)
@@ -153,14 +180,17 @@ class LaCafePopup:UIView
         self.addSubview(rating)
         self.addSubview(lbl_location_arrow)
         self.addSubview(lbl_distance)
+        self.addSubview(btn_route)
+        btn_route.addSubview(lbl_walk)
+        btn_route.addSubview(lbl_walk_time)
         self.addSubview(lbl_description)
         self.addSubview(lbl_clock)
         self.addSubview(lbl_time)
         self.addSubview(btn_to_cafe)
         
         self.backgroundColor = MyColors.gi.white
-//        self.layer.cornerRadius = 12
-    
+        //        self.layer.cornerRadius = 12
+        
         self.snp.makeConstraints(
             { make in
                 
@@ -215,9 +245,33 @@ class LaCafePopup:UIView
         lbl_distance.snp.makeConstraints(
             { make in
                 
-                make.centerY.equalTo(rating)
-                make.left.equalTo(lbl_location_arrow.snp.right).offset(8)
+                make.left.equalTo(lbl_location_arrow.snp.right).offset(4)
+                make.centerY.equalTo(lbl_location_arrow)
         })
+        
+        lbl_walk.snp.makeConstraints(
+            { make in
+                
+                make.left.equalToSuperview().offset(10)
+                make.centerY.equalToSuperview()
+        })
+        
+        lbl_walk_time.snp.makeConstraints(
+            { make in
+                
+                make.right.equalToSuperview().offset(-10)
+                make.left.equalTo(lbl_walk.snp.right).offset(4)
+                make.centerY.equalToSuperview()
+        })
+        
+        btn_route.snp.makeConstraints(
+            { make in
+                
+                make.right.equalToSuperview().offset(-16)
+                make.height.equalTo(LaCafePopup.route_btn_height)
+                make.centerY.equalTo(rating)
+        })
+        
         
         lbl_description.snp.makeConstraints(
             { make in
@@ -252,8 +306,31 @@ class LaCafePopup:UIView
         })
     }
     
-    override func layoutSubviews() {
+    override func layoutSubviews()
+    {
         super.layoutSubviews()
         self.makeRoundCorners(corners: [.topLeft,.topRight], radius: 12)
+        
+        loadRoute()
+    }
+    
+    private func loadRoute()
+    {
+        guard let user_location = BusMainEvents.gi.br_current_location.value,
+            let cafe_location = cafe.getCafeLocation() else { return }
+        
+        RoutesManager.gi.getRouteInfo(start: user_location, finish: cafe_location, action_success:
+            { route_info in
+                
+                self.lbl_walk_time.text = route_info.getTimeText()
+                self.lbl_distance.text = route_info.getDistanceText()
+                
+                self.btn_route.myla()
+                self.btn_route.addGradientView(grad_view: MyColors.gi.getOrangeGradient(horizontal: true))
+                
+                self.btn_route.addAction {
+                    self.action_clicked_route(route_info)
+                }
+        })
     }
 }

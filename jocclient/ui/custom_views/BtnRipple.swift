@@ -14,7 +14,7 @@ class BtnRipple:BaseBtn
                 rippleView.rippleColor = MyColors.gi.gray2.withAlphaComponent(0.5)
             }else
             {
-                 rippleView.rippleColor = newValue!.darker(by: 10)!.withAlphaComponent(0.4)
+                rippleView.rippleColor = newValue!.darker(by: 10)!.withAlphaComponent(0.4)
             }
         }
     }
@@ -22,7 +22,7 @@ class BtnRipple:BaseBtn
     init()
     {
         super.init(frame: CGRect.zero)
-
+        
         rippleView = MDCRippleView()
         rippleView.rippleColor = MyColors.gi.orange.withAlphaComponent(0.5)
         self.addSubview(rippleView)
@@ -71,5 +71,28 @@ class BtnRipple:BaseBtn
     func setRippleCornerRadius(radius:CGFloat)
     {
         rippleView.layer.cornerRadius = radius
+    }
+}
+
+extension BtnRipple
+{
+    static func getSocialBtn(str:FawString,action:@escaping ()->Void)->BtnRipple
+    {
+        let btn = BtnRipple()
+        btn.backgroundColor = MyColors.gi.white
+        btn.setRippleColor(color: MyColors.gi.gray1)
+        btn.br_font.accept(MyFonts.gi.faw_brands_s)
+        btn.br_text.accept(str.rawValue)
+        btn.br_text_color.accept(MyColors.gi.orange_dark)
+        btn.snp.makeConstraints(
+            { make in
+                
+                make.width.height.equalTo(FactoryCafePage.social_icon_size)
+        })
+        btn.layer.cornerRadius = CGFloat(FactoryCafePage.social_icon_size/2)
+        btn.setRippleCornerRadius(radius: CGFloat(FactoryCafePage.social_icon_size/2))
+        btn.setEdgeInsets(left: 0, top: 0, right: 0, bottom: 0)
+        btn.addAction(action)
+        return btn
     }
 }
